@@ -8,42 +8,44 @@
         currentMode: 'serve',
 
         // normal game flow
-        game: function (keyboard, paddle, ball) {
+        game: {
+            tick: function (keyboard, paddle, ball) {
 
-            var game = this.game;
+                var game = this.game;
 
-            // default paddle velocity to zero
-            paddle.body.velocity.set(0, 0);
+                // default paddle velocity to zero
+                paddle.body.velocity.set(0, 0);
 
-            // set velocity based on keyboard
-            if (keyboard.isDown(37)) {
-                paddle.body.velocity.set(-200, 0);
+                // set velocity based on keyboard
+                if (keyboard.isDown(37)) {
+                    paddle.body.velocity.set(-200, 0);
+                }
+                if (keyboard.isDown(39)) {
+                    paddle.body.velocity.set(200, 0);
+                }
+
+                // collide with paddle
+                game.physics.arcade.collide(ball, paddle);
+
+                // collide with blocks
+                game.physics.arcade.collide(ball, Blocks.blocks);
+
+                if (Blocks.countAlive() === 0) {
+
+                    // start new round!
+                    setRound(game, game.data.round += 1);
+
+                    // just set up another set for now
+                    Blocks.setupDataObjects();
+
+                    centerPaddle(paddle);
+
+                    // set back to serve mode
+                    modes.currentMode = 'serve';
+
+                }
+
             }
-            if (keyboard.isDown(39)) {
-                paddle.body.velocity.set(200, 0);
-            }
-
-            // collide with paddle
-            game.physics.arcade.collide(ball, paddle);
-
-            // collide with blocks
-            game.physics.arcade.collide(ball, Blocks.blocks);
-
-            if (Blocks.countAlive() === 0) {
-
-                // start new round!
-                setRound(game, game.data.round += 1);
-
-                // just set up another set for now
-                Blocks.setupDataObjects();
-
-                centerPaddle(paddle);
-
-                // set back to serve mode
-                modes.currentMode = 'serve';
-
-            }
-
         },
 
         // serve mode happens when first starting a new game, or a ball
@@ -56,47 +58,51 @@
             dist = 100,
             startAngle = -Math.PI + Math.PI / 180 * 45;
 
-            return function (keyboard, paddle, ball) {
+            return {
 
-                var per = tick / totalTicks,
-                bias = Math.abs(0.5 - per) / 0.5,
-                angle = startAngle + (Math.PI / 180 * 90 * bias);
+                tick: function (keyboard, paddle, ball) {
 
-                // stop any animation, set a static frame
-                ball.animations.stop();
-                ball.frame = 1;
+                    var per = tick / totalTicks,
+                    bias = Math.abs(0.5 - per) / 0.5,
+                    angle = startAngle + (Math.PI / 180 * 90 * bias);
 
-                // velocity is set at zero for now,same for paddle
-                ball.body.velocity.set(0, 0);
-                paddle.body.velocity.set(0, 0);
+                    // stop any animation, set a static frame
+                    ball.animations.stop();
+                    ball.frame = 1;
 
-                ball.x = paddle.x + Math.cos(angle) * dist;
-                ball.y = paddle.y + Math.sin(angle) * dist;
+                    // velocity is set at zero for now,same for paddle
+                    ball.body.velocity.set(0, 0);
+                    paddle.body.velocity.set(0, 0);
 
-                tick += 1;
-                tick %= totalTicks;
+                    ball.x = paddle.x + Math.cos(angle) * dist;
+                    ball.y = paddle.y + Math.sin(angle) * dist;
 
-                // if space
-                if (keyboard.isDown(38)) {
+                    tick += 1;
+                    tick %= totalTicks;
 
-                    var angleToPaddle = Phaser.Point.angle({
-                            x: ball.x,
-                            y: ball.y
-                        }, {
-                            x: paddle.x,
-                            y: paddle.y
-                        }) + Math.PI,
-                    x = Math.cos(angleToPaddle) * game.data.ballSpeed,
-                    y = Math.sin(angleToPaddle) * game.data.ballSpeed;
+                    // if space
+                    if (keyboard.isDown(38)) {
 
-                    // start ball roll animation
-                    ball.animations.play('roll');
+                        var angleToPaddle = Phaser.Point.angle({
+                                x: ball.x,
+                                y: ball.y
+                            }, {
+                                x: paddle.x,
+                                y: paddle.y
+                            }) + Math.PI,
+                        x = Math.cos(angleToPaddle) * game.data.ballSpeed,
+                        y = Math.sin(angleToPaddle) * game.data.ballSpeed;
 
-                    // set ball velocity
-                    ball.body.velocity.set(x, y);
+                        // start ball roll animation
+                        ball.animations.play('roll');
 
-                    // switch to game mode
-                    modes.currentMode = 'game';
+                        // set ball velocity
+                        ball.body.velocity.set(x, y);
+
+                        // switch to game mode
+                        modes.currentMode = 'game';
+
+                    }
 
                 }
 
@@ -106,7 +112,9 @@
             ()),
 
         // game over mode
-        gameover: function (keyboard, paddle, ball) {}
+        gameover: {
+            tick: function (keyboard, paddle, ball) {}
+        }
 
     };
 
@@ -226,7 +234,7 @@
             // check keyboard
             var keyboard = game.input.keyboard;
 
-            modes[modes.currentMode].call(this, keyboard, paddle, ball);
+            modes[modes.currentMode].tick.call(this, keyboard, paddle, ball);
 
             // text display
             game.world.getByName('text-0').text = 'round: ' + game.data.round + ' score: ' + game.data.score;
