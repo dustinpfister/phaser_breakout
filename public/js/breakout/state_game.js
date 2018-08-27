@@ -42,12 +42,14 @@
 
             var tick = 0,
             totalTicks = 50,
+			dist = 100,
             startAngle = -Math.PI + Math.PI / 180 * 45;
 
             return function (keyboard, paddle, ball) {
 
-                var angle = startAngle,
-                dist = 100;
+                var per = tick / totalTicks,
+                bias = Math.abs(0.5 - per) / 0.5,
+                angle = startAngle + (Math.PI / 180 * 90 * bias);
 
                 // stop any animation, set a static frame
                 ball.animations.stop();
@@ -58,6 +60,9 @@
 
                 ball.x = paddle.x + Math.cos(angle) * dist;
                 ball.y = paddle.y + Math.sin(angle) * dist;
+
+                tick += 1;
+                tick %= totalTicks;
 
             };
 
