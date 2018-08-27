@@ -32,6 +32,9 @@
                 // just set up another set for now
                 Blocks.setupDataObjects();
 
+                // set back to serve mode
+                modes.currentMode = 'serve';
+
             }
 
         },
@@ -106,13 +109,14 @@
             // paddle
             var paddle = game.add.sprite(0, 0, 'paddle', 0);
             paddle.name = 'paddle';
-            paddle.x = game.world.centerX;
+
+			            paddle.x = game.world.centerX;
             paddle.y = game.world.height - 16;
             paddle.anchor.set(0.5, 0.5);
 
-            ball.x = paddle.x;
-            ball.y = paddle.y - 50;
-            ball.anchor.set(0.5, 0.5);
+            //ball.x = paddle.x;
+            //ball.y = paddle.y - 50;
+            //ball.anchor.set(0.5, 0.5);
 
             // Setup blocks
             Blocks.setup();
