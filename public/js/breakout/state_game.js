@@ -5,7 +5,7 @@
     // the update method of the game state
     var modes = {
 
-        currentMode: 'game',
+        currentMode: 'serve',
 
         // normal game flow
         game: function (keyboard, paddle, ball) {
@@ -34,7 +34,35 @@
 
             }
 
+        },
+
+        // serve mode happens when first starting a new game, or a ball
+        // goes out of bounds
+        serve: (function () {
+
+            var tick = 0,
+            totalTicks = 50,
+            startAngle = -Math.PI + Math.PI / 180 * 45;
+
+            return function (keyboard, paddle, ball) {
+
+                var angle = startAngle,
+                dist = 100;
+
+                // stop any animation, set a static frame
+                ball.animations.stop();
+                ball.frame = 1;
+
+                // velocity is set at zero for now
+                ball.body.velocity.set(0, 0);
+
+                ball.x = paddle.x + Math.cos(angle) * dist;
+                ball.y = paddle.y + Math.sin(angle) * dist;
+
+            };
+
         }
+            ())
 
     };
 
