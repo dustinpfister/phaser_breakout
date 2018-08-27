@@ -10,6 +10,8 @@
         // normal game flow
         game: function (keyboard, paddle, ball) {
 
+            var game = this.game;
+
             // default paddle velocity to zero
             paddle.body.velocity.set(0, 0);
 
@@ -22,16 +24,15 @@
             }
 
             // collide with paddle
-            this.game.physics.arcade.collide(ball, paddle);
+            game.physics.arcade.collide(ball, paddle);
 
             // collide with blocks
-            this.game.physics.arcade.collide(ball, Blocks.blocks);
+            game.physics.arcade.collide(ball, Blocks.blocks);
 
             if (Blocks.countAlive() === 0) {
 
                 // start new round!
-
-                this.game.data.round += 1;
+                setRound(game, game.data.round += 1);
 
                 // just set up another set for now
                 Blocks.setupDataObjects();
@@ -50,6 +51,7 @@
         serve: (function () {
 
             var tick = 0,
+            game = this.game,
             totalTicks = 150,
             dist = 100,
             startAngle = -Math.PI + Math.PI / 180 * 45;
@@ -84,8 +86,8 @@
                             x: paddle.x,
                             y: paddle.y
                         }) + Math.PI,
-                    x = Math.cos(angleToPaddle) * 200,
-                    y = Math.sin(angleToPaddle) * 200;
+                    x = Math.cos(angleToPaddle) * game.data.ballSpeed,
+                    y = Math.sin(angleToPaddle) * game.data.ballSpeed;
 
                     // start ball roll animation
                     ball.animations.play('roll');
@@ -113,6 +115,15 @@
         paddle.anchor.set(0.5, 0.5);
     };
 
+    var setRound = function (game, round) {
+
+        game.data.round = round;
+
+        // ball speed formula
+        game.data.ballSpeed = Math.floor(100 + 25 * round);
+
+    };
+
     // add the state to game
     game.state.add('game', {
 
@@ -121,8 +132,10 @@
             game.data = game.data || {};
 
             // always start are round 1
-            game.data.round = 1;
-            game.data.ballSpeed = 100;
+            //game.data.round = 1;
+            //game.data.ballSpeed = 100;
+
+            setRound(game, 1);
 
             // ball
             var ball = game.add.sprite(0, 0, 'ball', 0),
@@ -181,10 +194,8 @@
 
                 a = aUp - Math.PI / 180 * 75 * per * dir;
 
-                x = Math.floor(Math.cos(a) * 200);
-                y = Math.floor(Math.sin(a) * 200);
-
-                console.log(x, y);
+                x = Math.floor(Math.cos(a) * game.data.ballSpeed);
+                y = Math.floor(Math.sin(a) * game.data.ballSpeed);
 
                 ball.body.velocity.set(x, y);
 
@@ -205,6 +216,7 @@
 
             // text display
             game.world.getByName('text-0').text = 'round: ' + game.data.round + ' score: ' + game.data.score;
+            game.world.getByName('text-1').text = 'ballSpeed: ' + game.data.ballSpeed;
             //game.world.getByName('text-0').text = 'ball-velocity: ' + ball.body.velocity.x + ',' + ball.body.velocity.y;
             //game.world.getByName('text-1').text = 'ball-position: ' + Math.floor(ball.x) + ',' + Math.floor(ball.y);
             //game.world.getByName('text-2').text = 'blocks alive: ' + Blocks.countAlive();
