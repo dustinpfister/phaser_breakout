@@ -103,7 +103,10 @@
             };
 
         }
-            ())
+            ()),
+
+        // game over mode
+        gameover: function (keyboard, paddle, ball) {}
 
     };
 
@@ -131,11 +134,11 @@
 
             game.data = game.data || {};
 
-            // always start are round 1
-            //game.data.round = 1;
-            //game.data.ballSpeed = 100;
-
+            // set to round 1
             setRound(game, 1);
+
+            // start with three lives
+            game.data.lives = 3;
 
             // ball
             var ball = game.add.sprite(0, 0, 'ball', 0),
@@ -170,7 +173,17 @@
             ball.checkWorldBounds = true;
             ball.events.onOutOfBounds.add(function () {
 
-                modes.currentMode = 'serve';
+                game.data.lives -= 1;
+
+                if (game.data.lives > 0) {
+
+                    modes.currentMode = 'serve';
+
+                } else {
+
+                    modes.currentMode = 'gameover';
+
+                }
 
             }, this);
 
@@ -216,7 +229,8 @@
 
             // text display
             game.world.getByName('text-0').text = 'round: ' + game.data.round + ' score: ' + game.data.score;
-            game.world.getByName('text-1').text = 'ballSpeed: ' + game.data.ballSpeed;
+            game.world.getByName('text-1').text = 'lives: ' + game.data.lives;
+            game.world.getByName('text-2').text = 'ballSpeed: ' + game.data.ballSpeed;
             //game.world.getByName('text-0').text = 'ball-velocity: ' + ball.body.velocity.x + ',' + ball.body.velocity.y;
             //game.world.getByName('text-1').text = 'ball-position: ' + Math.floor(ball.x) + ',' + Math.floor(ball.y);
             //game.world.getByName('text-2').text = 'blocks alive: ' + Blocks.countAlive();

@@ -5,6 +5,7 @@ game.data = {
 
     frameData: {},
     score: 0,
+    lives: 3,
     round: 1,
     ballSpeed: 100
 
