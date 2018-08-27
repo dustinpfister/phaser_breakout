@@ -1,0 +1,15 @@
+{
+  "name": "phaser_breakout",
+  "version": "1.0.0",
+  "description": "This is a phaser powered game about orbs that are used in turn based matches against an AI.",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dustin Pfister",
+  "license": "GPL-3.0"
+}
