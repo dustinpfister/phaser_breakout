@@ -29,6 +29,10 @@
 
             if (Blocks.countAlive() === 0) {
 
+                // start new round!
+
+                this.game.data.round += 1;
+
                 // just set up another set for now
                 Blocks.setupDataObjects();
 
@@ -114,6 +118,11 @@
 
         create: function () {
 
+            game.data = game.data || {};
+
+            // always start are round 1
+            game.data.round = 1;
+
             // ball
             var ball = game.add.sprite(0, 0, 'ball', 0),
             fd = game.data.frameData['ball'];
@@ -196,7 +205,7 @@
             modes[modes.currentMode].call(this, keyboard, paddle, ball);
 
             // text display
-            game.world.getByName('text-0').text = 'score: ' + game.data.score;
+            game.world.getByName('text-0').text = 'round: ' + game.data.round + ' score: ' + game.data.score;
             //game.world.getByName('text-0').text = 'ball-velocity: ' + ball.body.velocity.x + ',' + ball.body.velocity.y;
             //game.world.getByName('text-1').text = 'ball-position: ' + Math.floor(ball.x) + ',' + Math.floor(ball.y);
             //game.world.getByName('text-2').text = 'blocks alive: ' + Blocks.countAlive();

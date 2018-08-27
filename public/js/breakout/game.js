@@ -4,6 +4,7 @@ var game = new Phaser.Game(320, 240, Phaser.AUTO, 'gamearea');
 game.data = {
 
     frameData: {},
-    score: 0
+    score: 0,
+    round: 1
 
 };

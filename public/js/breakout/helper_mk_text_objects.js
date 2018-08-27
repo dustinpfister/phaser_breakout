@@ -6,7 +6,7 @@ var mkTextObjects = function (opt) {
     opt.count = opt.count || 1;
     opt.sx = opt.sx || 5;
     opt.sy = opt.sy || 5;
-    opt.size = opt.size || 8;
+    opt.size = opt.size || 10;
     opt.font = opt.font || {
         fill: 'white',
         font: opt.size + 'px courier'
