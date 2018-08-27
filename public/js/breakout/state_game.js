@@ -1,122 +1,144 @@
-game.state.add('game', {
+(function () {
 
-    create: function () {
+    // more than one mode for the game
+    // these are difreent methods that will be used in
+    // the update method of the game state
+    var modes = {
 
-        // ball
-        var ball = game.add.sprite(0, 0, 'ball', 0),
-        fd = game.data.frameData['ball'];
-        ball.name = 'ball';
-        ball.animations.add('roll', fd, 60, true);
-        ball.animations.play('roll');
+        currentMode: 'game',
 
-        // paddle
-        var paddle = game.add.sprite(0, 0, 'paddle', 0);
-        paddle.name = 'paddle';
-        paddle.x = game.world.centerX;
-        paddle.y = game.world.height - 16;
-        paddle.anchor.set(0.5, 0.5);
+        // normal game flow
+        game: function (keyboard, paddle, ball) {
 
-        ball.x = paddle.x;
-        ball.y = paddle.y - 50;
-        ball.anchor.set(0.5, 0.5);
+            // default paddle velocity to zero
+            paddle.body.velocity.set(0, 0);
 
-        // Setup blocks
-        Blocks.setup();
+            // set velocity based on keyboard
+            if (keyboard.isDown(37)) {
+                paddle.body.velocity.set(-200, 0);
+            }
+            if (keyboard.isDown(39)) {
+                paddle.body.velocity.set(200, 0);
+            }
 
-        // mk text objects
-        mkTextObjects({
-            game: game,
-            count: 3
-        });
+            // collide with paddle
+            this.game.physics.arcade.collide(ball, paddle);
 
-        // physics
-        game.physics.enable([ball, paddle]);
+            // collide with blocks
+            this.game.physics.arcade.collide(ball, Blocks.blocks);
 
-        // no downward collision
-        game.physics.arcade.checkCollision.down = false;
+            if (Blocks.countAlive() === 0) {
 
-        ball.body.collideWorldBounds = true;
-        ball.body.bounce.set(1);
-        ball.body.velocity.set(0, 150);
+                // just set up another set for now
+                Blocks.setupDataObjects();
 
-        ball.checkWorldBounds = true;
-        ball.events.onOutOfBounds.add(function () {
+            }
+
+        }
+
+    };
+
+    // add the state to game
+    game.state.add('game', {
+
+        create: function () {
+
+            // ball
+            var ball = game.add.sprite(0, 0, 'ball', 0),
+            fd = game.data.frameData['ball'];
+            ball.name = 'ball';
+            ball.animations.add('roll', fd, 60, true);
+            ball.animations.play('roll');
+
+            // paddle
+            var paddle = game.add.sprite(0, 0, 'paddle', 0);
+            paddle.name = 'paddle';
+            paddle.x = game.world.centerX;
+            paddle.y = game.world.height - 16;
+            paddle.anchor.set(0.5, 0.5);
 
             ball.x = paddle.x;
-            ball.y = paddle.y - 20;
+            ball.y = paddle.y - 50;
+            ball.anchor.set(0.5, 0.5);
+
+            // Setup blocks
+            Blocks.setup();
+
+            // mk text objects
+            mkTextObjects({
+                game: game,
+                count: 3
+            });
+
+            // physics
+            game.physics.enable([ball, paddle]);
+
+            // no downward collision
+            game.physics.arcade.checkCollision.down = false;
+
+            ball.body.collideWorldBounds = true;
+            ball.body.bounce.set(1);
             ball.body.velocity.set(0, 150);
 
-        }, this);
+            ball.checkWorldBounds = true;
+            ball.events.onOutOfBounds.add(function () {
 
-        paddle.body.immovable = true;
-        paddle.body.collideWorldBounds = true;
+                ball.x = paddle.x;
+                ball.y = paddle.y - 20;
+                ball.body.velocity.set(0, 150);
 
-        paddle.body.onCollide = new Phaser.Signal();
-        paddle.body.onCollide.add(function () {
+            }, this);
 
-            var max = paddle.width / 2 + ball.width / 2,
-            fromCenter = Math.abs(ball.x - paddle.x),
-            dir = ball.x - paddle.x < 0 ? 1 : -1;
-            per = fromCenter / max,
-            x = 0,
-            y = 0,
-            aUp = -Math.PI / 2,
-            a = aUp;
+            paddle.body.immovable = true;
+            paddle.body.collideWorldBounds = true;
 
-            // clamp per
-            per = Phaser.Math.clamp(per, 0, 1);
+            paddle.body.onCollide = new Phaser.Signal();
+            paddle.body.onCollide.add(function () {
 
-            a = aUp - Math.PI / 180 * 75 * per * dir
+                var max = paddle.width / 2 + ball.width / 2,
+                fromCenter = Math.abs(ball.x - paddle.x),
+                dir = ball.x - paddle.x < 0 ? 1 : -1;
+                per = fromCenter / max,
+                x = 0,
+                y = 0,
+                aUp = -Math.PI / 2,
+                a = aUp;
+
+                // clamp per
+                per = Phaser.Math.clamp(per, 0, 1);
+
+                a = aUp - Math.PI / 180 * 75 * per * dir;
 
                 x = Math.floor(Math.cos(a) * 200);
-            y = Math.floor(Math.sin(a) * 200);
+                y = Math.floor(Math.sin(a) * 200);
 
-            console.log(x, y);
+                console.log(x, y);
 
-            ball.body.velocity.set(x, y);
+                ball.body.velocity.set(x, y);
 
-        });
+            });
 
-    },
+        },
 
-    update: function () {
+        update: function () {
 
-        var ball = game.world.getByName('ball'),
-        paddle = game.world.getByName('paddle'),
-        text;
+            var ball = game.world.getByName('ball'),
+            paddle = game.world.getByName('paddle'),
+            text;
 
-        // default paddle velocity to zero
-        paddle.body.velocity.set(0, 0);
+            // check keyboard
+            var keyboard = game.input.keyboard;
 
-        // check keyboard
-        var k = game.input.keyboard;
+            modes[modes.currentMode].call(this, keyboard, paddle, ball);
 
-        // set velocity based on keyboard
-        if (k.isDown(37)) {
-            paddle.body.velocity.set(-200, 0);
-        }
-        if (k.isDown(39)) {
-            paddle.body.velocity.set(200, 0);
+            // text display
+            game.world.getByName('text-0').text = 'score: ' + game.data.score;
+            //game.world.getByName('text-0').text = 'ball-velocity: ' + ball.body.velocity.x + ',' + ball.body.velocity.y;
+            //game.world.getByName('text-1').text = 'ball-position: ' + Math.floor(ball.x) + ',' + Math.floor(ball.y);
+            //game.world.getByName('text-2').text = 'blocks alive: ' + Blocks.countAlive();
         }
 
-        // collide with paddle
-        game.physics.arcade.collide(ball, paddle);
+    });
 
-        // collide with blocks
-        game.physics.arcade.collide(ball, Blocks.blocks);
-
-        if (Blocks.countAlive() === 0) {
-
-            // just set up another set for now
-            Blocks.setupDataObjects();
-
-        }
-
-        // text display
-		game.world.getByName('text-0').text = 'score: ' + game.data.score;
-        //game.world.getByName('text-0').text = 'ball-velocity: ' + ball.body.velocity.x + ',' + ball.body.velocity.y;
-        //game.world.getByName('text-1').text = 'ball-position: ' + Math.floor(ball.x) + ',' + Math.floor(ball.y);
-        //game.world.getByName('text-2').text = 'blocks alive: ' + Blocks.countAlive();
-    }
-
-});
+}
+    ());
