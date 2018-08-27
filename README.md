@@ -1,6 +1,6 @@
 # phaser_breakout
 
-Yet another breakout clone. However this one is built on top of phaser ce, in my coding style, and serves as an example project of sorts for the sake of making more stuff to write about on my blog here at git hub pages. Also There is also the possibility of putting in some neat features, that might be noval, or at least an original collection of features. That is, putting a unique spin on something that has all ready been done to death.
+Yet another breakout clone. However this one is built on top of [phaser ce](https://photonstorm.github.io/phaser-ce/), in my coding style, and serves as an example project of sorts for the sake of making more stuff to write about on my [blog here at github pages](https://dustinpfister.github.io/). Also There is also the possibility of putting in some neat features, that might be noval, or at least an original collection of features. That is, putting a unique spin on something that has all ready been done to death.
 
 ## To run locally
 
