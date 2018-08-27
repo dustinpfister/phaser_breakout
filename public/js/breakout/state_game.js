@@ -55,8 +55,9 @@
                 ball.animations.stop();
                 ball.frame = 1;
 
-                // velocity is set at zero for now
+                // velocity is set at zero for now,same for paddle
                 ball.body.velocity.set(0, 0);
+                paddle.body.velocity.set(0, 0);
 
                 ball.x = paddle.x + Math.cos(angle) * dist;
                 ball.y = paddle.y + Math.sin(angle) * dist;
