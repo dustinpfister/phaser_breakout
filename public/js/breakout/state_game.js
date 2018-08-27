@@ -69,11 +69,15 @@
 
                     modes.currentMode = 'game';
 
-					var angleToPaddle = Phaser.Point.angle({x:ball.x,y:ball.y},{x:paddle.x,y:paddle.y}) + Math.PI,
+                    var angleToPaddle = Phaser.Point.angle({
+                            x: ball.x,
+                            y: ball.y
+                        }, {
+                            x: paddle.x,
+                            y: paddle.y
+                        }) + Math.PI,
                     x = Math.cos(angleToPaddle) * 200,
                     y = Math.sin(angleToPaddle) * 200;
-					
-					console.log(angleToPaddle,x,y);
 
                     ball.body.velocity.set(x, y);
 
@@ -131,9 +135,7 @@
             ball.checkWorldBounds = true;
             ball.events.onOutOfBounds.add(function () {
 
-                ball.x = paddle.x;
-                ball.y = paddle.y - 20;
-                ball.body.velocity.set(0, 150);
+                modes.currentMode = 'serve';
 
             }, this);
 
