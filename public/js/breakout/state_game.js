@@ -7,8 +7,22 @@
 
         currentMode: 'serve',
 
+        switchMode: function (mode, context) {
+
+            modes.currentMode = mode;
+
+            // call the states setup methods if it has one
+            var setup = modes[modes.currentMode].setup;
+
+            if (setup) {
+                setup.call(context);
+            }
+
+        },
+
         // normal game flow
         game: {
+
             tick: function (keyboard, paddle, ball) {
 
                 var game = this.game;
@@ -41,9 +55,14 @@
                     centerPaddle(paddle);
 
                     // set back to serve mode
-                    modes.currentMode = 'serve';
+                    //modes.currentMode = 'serve';
+                    modes.switchMode('serve', this);
 
                 }
+
+                // text
+                game.world.getByName('text-0').text = 'round: ' + game.data.round + ' score: ' + game.data.score;
+                game.world.getByName('text-1').text = 'lives: ' + game.data.lives;
 
             }
         },
@@ -80,7 +99,7 @@
                     tick += 1;
                     tick %= totalTicks;
 
-                    // if space
+                    // if up on keyboard
                     if (keyboard.isDown(38)) {
 
                         var angleToPaddle = Phaser.Point.angle({
@@ -100,9 +119,14 @@
                         ball.body.velocity.set(x, y);
 
                         // switch to game mode
-                        modes.currentMode = 'game';
+                        //modes.currentMode = 'game';
+                        modes.switchMode('game', this);
 
                     }
+
+                    // text
+                    game.world.getByName('text-0').text = 'round: ' + game.data.round + ' score: ' + game.data.score;
+                    game.world.getByName('text-1').text = 'lives: ' + game.data.lives;
 
                 }
 
@@ -113,7 +137,28 @@
 
         // game over mode
         gameover: {
-            tick: function (keyboard, paddle, ball) {}
+
+            setup: function () {
+
+                var paddle = this.game.world.getByName('paddle');
+
+                // default paddle velocity to zero
+                paddle.body.velocity.set(0, 0);
+
+                game.world.getByName('text-0').text = 'Game Over - press up arrow on keyboard to restart';
+                game.world.getByName('text-1').text = 'score: ' + this.game.data.score;
+
+            },
+            tick: function (keyboard, paddle, ball) {
+
+                // if up on keyboard
+                if (keyboard.isDown(38)) {
+
+                    game.state.start('game');
+
+                }
+
+            }
         }
 
     };
@@ -186,11 +231,13 @@
                 if (game.data.lives > 0) {
 
                     centerPaddle(paddle);
-                    modes.currentMode = 'serve';
+                    //modes.currentMode = 'serve';
+                    modes.switchMode('serve', this);
 
                 } else {
 
-                    modes.currentMode = 'gameover';
+                    //modes.currentMode = 'gameover';
+                    modes.switchMode('gameover', this);
 
                 }
 
@@ -223,6 +270,8 @@
 
             });
 
+            modes.switchMode('serve', this);
+
         },
 
         update: function () {
@@ -237,9 +286,9 @@
             modes[modes.currentMode].tick.call(this, keyboard, paddle, ball);
 
             // text display
-            game.world.getByName('text-0').text = 'round: ' + game.data.round + ' score: ' + game.data.score;
-            game.world.getByName('text-1').text = 'lives: ' + game.data.lives;
-            game.world.getByName('text-2').text = 'ballSpeed: ' + game.data.ballSpeed;
+            //game.world.getByName('text-0').text = 'round: ' + game.data.round + ' score: ' + game.data.score;
+            //game.world.getByName('text-1').text = 'lives: ' + game.data.lives;
+            //game.world.getByName('text-2').text = 'ballSpeed: ' + game.data.ballSpeed;
             //game.world.getByName('text-0').text = 'ball-velocity: ' + ball.body.velocity.x + ',' + ball.body.velocity.y;
             //game.world.getByName('text-1').text = 'ball-position: ' + Math.floor(ball.x) + ',' + Math.floor(ball.y);
             //game.world.getByName('text-2').text = 'blocks alive: ' + Blocks.countAlive();
