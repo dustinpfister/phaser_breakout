@@ -42,7 +42,7 @@
 
             var tick = 0,
             totalTicks = 50,
-			dist = 100,
+            dist = 100,
             startAngle = -Math.PI + Math.PI / 180 * 45;
 
             return function (keyboard, paddle, ball) {
@@ -63,6 +63,21 @@
 
                 tick += 1;
                 tick %= totalTicks;
+
+                // if space
+                if (keyboard.isDown(38)) {
+
+                    modes.currentMode = 'game';
+
+					var angleToPaddle = Phaser.Point.angle({x:ball.x,y:ball.y},{x:paddle.x,y:paddle.y}) + Math.PI,
+                    x = Math.cos(angleToPaddle) * 200,
+                    y = Math.sin(angleToPaddle) * 200;
+					
+					console.log(angleToPaddle,x,y);
+
+                    ball.body.velocity.set(x, y);
+
+                }
 
             };
 
