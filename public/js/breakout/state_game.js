@@ -73,8 +73,6 @@
                 // if space
                 if (keyboard.isDown(38)) {
 
-                    modes.currentMode = 'game';
-
                     var angleToPaddle = Phaser.Point.angle({
                             x: ball.x,
                             y: ball.y
@@ -85,7 +83,14 @@
                     x = Math.cos(angleToPaddle) * 200,
                     y = Math.sin(angleToPaddle) * 200;
 
+                    // start ball roll animation
+                    ball.animations.play('roll');
+
+                    // set ball velocity
                     ball.body.velocity.set(x, y);
+
+                    // switch to game mode
+                    modes.currentMode = 'game';
 
                 }
 
@@ -114,7 +119,7 @@
             fd = game.data.frameData['ball'];
             ball.name = 'ball';
             ball.animations.add('roll', fd, 60, true);
-            ball.animations.play('roll');
+            // ball.animations.play('roll');
 
             // paddle
             var paddle = game.add.sprite(0, 0, 'paddle', 0);
