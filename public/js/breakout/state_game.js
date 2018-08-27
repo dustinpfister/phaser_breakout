@@ -32,6 +32,8 @@
                 // just set up another set for now
                 Blocks.setupDataObjects();
 
+                centerPaddle(paddle);
+
                 // set back to serve mode
                 modes.currentMode = 'serve';
 
@@ -94,6 +96,14 @@
 
     };
 
+    // HELPERS
+    // center the paddle
+    var centerPaddle = function (paddle) {
+        paddle.x = game.world.centerX;
+        paddle.y = game.world.height - 16;
+        paddle.anchor.set(0.5, 0.5);
+    };
+
     // add the state to game
     game.state.add('game', {
 
@@ -110,13 +120,7 @@
             var paddle = game.add.sprite(0, 0, 'paddle', 0);
             paddle.name = 'paddle';
 
-			            paddle.x = game.world.centerX;
-            paddle.y = game.world.height - 16;
-            paddle.anchor.set(0.5, 0.5);
-
-            //ball.x = paddle.x;
-            //ball.y = paddle.y - 50;
-            //ball.anchor.set(0.5, 0.5);
+            centerPaddle(paddle);
 
             // Setup blocks
             Blocks.setup();

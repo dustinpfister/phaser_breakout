@@ -9,8 +9,8 @@ var Blocks = {
 
         this.game = opt.game || game;
         this.sheetKey = 'blocks';
-        this.gridWidth = 13;
-        this.gridHeight = 8;
+        this.gridWidth = 1;//13;
+        this.gridHeight = 1;//8;
         this.blockWidth = 20;
         this.blockHeight = 8;
         this.sx = 32;
