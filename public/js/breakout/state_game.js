@@ -4,7 +4,7 @@ game.state.add('game', {
 
         // ball
         var ball = game.add.sprite(0, 0, 'ball', 0),
-        fd = game.global.frameData['ball'];
+        fd = game.data.frameData['ball'];
         ball.name = 'ball';
         ball.animations.add('roll', fd, 60, true);
         ball.animations.play('roll');
@@ -113,9 +113,10 @@ game.state.add('game', {
         }
 
         // text display
-        game.world.getByName('text-0').text = 'ball-velocity: ' + ball.body.velocity.x + ',' + ball.body.velocity.y;
-        game.world.getByName('text-1').text = 'ball-position: ' + Math.floor(ball.x) + ',' + Math.floor(ball.y);
-        game.world.getByName('text-2').text = 'blocks alive: ' + Blocks.countAlive();
+		game.world.getByName('text-0').text = 'score: ' + game.data.score;
+        //game.world.getByName('text-0').text = 'ball-velocity: ' + ball.body.velocity.x + ',' + ball.body.velocity.y;
+        //game.world.getByName('text-1').text = 'ball-position: ' + Math.floor(ball.x) + ',' + Math.floor(ball.y);
+        //game.world.getByName('text-2').text = 'blocks alive: ' + Blocks.countAlive();
     }
 
 });

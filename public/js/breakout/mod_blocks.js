@@ -104,10 +104,16 @@ var Blocks = {
 
     },
 
+    // what happens when the ball hits a block
     onCollide: function () {
 
         // the block sprite should be this
-        var sprite = this;
+        var sprite = this,
+        points = 0;
+
+        // set score to zero if it is not there
+        this.game.data = this.game.data || {};
+        this.game.data.score = this.game.data.score || 0;
 
         sprite.data.hp -= 1;
 
@@ -115,13 +121,18 @@ var Blocks = {
 
             sprite.data.hp = 0;
             sprite.body.enable = false;
-            sprite.alpha = 0
+            sprite.alpha = 0;
+
+            points += 100;
 
         } else {
 
             sprite.frame = sprite.data.hp - 1;
+            points += 10;
 
         }
+
+        this.game.data.score += points;
 
     }
 
