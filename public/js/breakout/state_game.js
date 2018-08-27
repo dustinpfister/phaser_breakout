@@ -177,6 +177,7 @@
 
                 if (game.data.lives > 0) {
 
+                    centerPaddle(paddle);
                     modes.currentMode = 'serve';
 
                 } else {
