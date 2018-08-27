@@ -50,7 +50,7 @@
         serve: (function () {
 
             var tick = 0,
-            totalTicks = 50,
+            totalTicks = 150,
             dist = 100,
             startAngle = -Math.PI + Math.PI / 180 * 45;
 
@@ -122,6 +122,7 @@
 
             // always start are round 1
             game.data.round = 1;
+            game.data.ballSpeed = 100;
 
             // ball
             var ball = game.add.sprite(0, 0, 'ball', 0),
@@ -153,8 +154,6 @@
 
             ball.body.collideWorldBounds = true;
             ball.body.bounce.set(1);
-            ball.body.velocity.set(0, 150);
-
             ball.checkWorldBounds = true;
             ball.events.onOutOfBounds.add(function () {
 

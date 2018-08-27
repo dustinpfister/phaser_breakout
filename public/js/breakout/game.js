@@ -5,6 +5,7 @@ game.data = {
 
     frameData: {},
     score: 0,
-    round: 1
+    round: 1,
+    ballSpeed: 100
 
 };
