@@ -182,7 +182,7 @@
 
                 ball.body.velocity.set(0, 0);
 
-                game.world.getByName('text-0').text = 'Game Paused - Press up key to continue';
+                game.world.getByName('text-0').text = 'Game Paused - Press \'a\' key to continue.';
 
             }
 
@@ -198,6 +198,7 @@
         paddle.anchor.set(0.5, 0.5);
     };
 
+    // set round method
     var setRound = function (game, round) {
 
         game.data.round = round;
@@ -207,6 +208,7 @@
 
     };
 
+    // set ball velocity
     var setBallVelocity = function (paddle, ball) {
 
         var angleToPaddle = Phaser.Point.angle({
@@ -225,20 +227,17 @@
 
     };
 
+    // sve ball velocity
     var saveBallVelocity = function (ball) {
-
-        //console.log(ball.body)
 
         ball.data.saveVelocity = new Phaser.Point(ball.body.velocity.x, ball.body.velocity.y);
 
     };
 
+    // load ball velocity
     var loadBallVelocity = function (ball) {
 
-        //ball.data.saveVelocity = Phaser.Point(ball.velocity.x, ball.velocity.y);
-
         var save = ball.data.saveVelocity;
-
         ball.body.velocity.set(save.x, save.y);
 
     };
