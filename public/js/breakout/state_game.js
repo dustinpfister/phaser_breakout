@@ -23,6 +23,15 @@
         // normal game flow
         game: {
 
+            setup: function () {
+
+                var paddle = this.game.world.getByName('paddle'),
+                ball = this.game.world.getByName('ball');
+
+                loadBallVelocity(ball);
+
+            },
+
             tick: function (keyboard, paddle, ball) {
 
                 var game = this.game;
@@ -37,6 +46,13 @@
                 if (keyboard.isDown(39)) {
                     paddle.body.velocity.set(200, 0);
                 }
+
+                // if up pause
+                //if (keyboard.isDown(38)) {
+
+                //    modes.switchMode('pause', this);
+
+                //}
 
                 // collide with paddle
                 game.physics.arcade.collide(ball, paddle);
@@ -102,21 +118,10 @@
                     // if up on keyboard
                     if (keyboard.isDown(38)) {
 
-                        var angleToPaddle = Phaser.Point.angle({
-                                x: ball.x,
-                                y: ball.y
-                            }, {
-                                x: paddle.x,
-                                y: paddle.y
-                            }) + Math.PI,
-                        x = Math.cos(angleToPaddle) * game.data.ballSpeed,
-                        y = Math.sin(angleToPaddle) * game.data.ballSpeed;
+                        setBallVelocity(paddle, ball);
 
                         // start ball roll animation
                         ball.animations.play('roll');
-
-                        // set ball velocity
-                        ball.body.velocity.set(x, y);
 
                         // switch to game mode
                         //modes.currentMode = 'game';
@@ -159,6 +164,28 @@
                 }
 
             }
+
+        },
+
+        pause: {
+
+            setup: function () {
+
+                var paddle = this.game.world.getByName('paddle'),
+                ball = this.game.world.getByName('ball');
+
+                saveBallVelocity(ball);
+
+            },
+
+            tick: function (keyboard, paddle, ball) {
+
+                ball.body.velocity.set(0, 0);
+
+                game.world.getByName('text-0').text = 'Game Paused - Press up key to continue';
+
+            }
+
         }
 
     };
@@ -177,6 +204,42 @@
 
         // ball speed formula
         game.data.ballSpeed = Math.floor(100 + 25 * round);
+
+    };
+
+    var setBallVelocity = function (paddle, ball) {
+
+        var angleToPaddle = Phaser.Point.angle({
+                x: ball.x,
+                y: ball.y
+            }, {
+                x: paddle.x,
+                y: paddle.y
+            }) + Math.PI,
+        x = Math.cos(angleToPaddle) * game.data.ballSpeed,
+        y = Math.sin(angleToPaddle) * game.data.ballSpeed;
+
+        // set ball velocity
+        ball.body.velocity.set(x, y);
+        saveBallVelocity(ball);
+
+    };
+
+    var saveBallVelocity = function (ball) {
+
+        //console.log(ball.body)
+
+        ball.data.saveVelocity = new Phaser.Point(ball.body.velocity.x, ball.body.velocity.y);
+
+    };
+
+    var loadBallVelocity = function (ball) {
+
+        //ball.data.saveVelocity = Phaser.Point(ball.velocity.x, ball.velocity.y);
+
+        var save = ball.data.saveVelocity;
+
+        ball.body.velocity.set(save.x, save.y);
 
     };
 
@@ -269,6 +332,28 @@
                 ball.body.velocity.set(x, y);
 
             });
+
+            // pause key
+            var pauseKey = game.input.keyboard.addKey(65);
+
+            pauseKey.onUp.add(function () {
+
+                if (modes.currentMode === 'game') {
+
+                    console.log('game paused');
+
+                    modes.switchMode('pause', this);
+                    return;
+
+                }
+
+                if (modes.currentMode === 'pause') {
+
+                    modes.switchMode('game', this);
+
+                }
+
+            })
 
             modes.switchMode('serve', this);
 
