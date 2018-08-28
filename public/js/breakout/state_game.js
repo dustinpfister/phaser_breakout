@@ -47,12 +47,22 @@
                     paddle.body.velocity.set(200, 0);
                 }
 
-                // if up pause
-                //if (keyboard.isDown(38)) {
+                // set velocity based on active pointer
+                if (game.input.activePointer.isDown) {
 
-                //    modes.switchMode('pause', this);
+                    if (game.input.x < paddle.x - 10) {
 
-                //}
+                        paddle.body.velocity.set(-200, 0);
+
+                    }
+
+                    if (game.input.x > paddle.x + 10) {
+
+                        paddle.body.velocity.set(200, 0);
+
+                    }
+
+                }
 
                 // collide with paddle
                 game.physics.arcade.collide(ball, paddle);
