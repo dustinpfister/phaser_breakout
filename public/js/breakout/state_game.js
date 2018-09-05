@@ -103,6 +103,19 @@
             dist = 100,
             startAngle = -Math.PI + Math.PI / 180 * 45;
 
+            var serveBall = function (paddle, ball) {
+
+                setBallVelocity(paddle, ball);
+
+                // start ball roll animation
+                ball.animations.play('roll');
+
+                // switch to game mode
+                //modes.currentMode = 'game';
+                modes.switchMode('game', this);
+
+            };
+
             return {
 
                 tick: function (keyboard, paddle, ball) {
@@ -128,27 +141,13 @@
                     // if up on keyboard
                     if (keyboard.isDown(38)) {
 
-                        setBallVelocity(paddle, ball);
-
-                        // start ball roll animation
-                        ball.animations.play('roll');
-
-                        // switch to game mode
-                        //modes.currentMode = 'game';
-                        modes.switchMode('game', this);
+                        serveBall.call(this, paddle, ball);
 
                     }
 
                     if (game.input.activePointer.isDown) {
 
-                        setBallVelocity(paddle, ball);
-
-                        // start ball roll animation
-                        ball.animations.play('roll');
-
-                        // switch to game mode
-                        //modes.currentMode = 'game';
-                        modes.switchMode('game', this);
+                        serveBall.call(this, paddle, ball);
 
                     }
 
