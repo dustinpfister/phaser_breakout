@@ -139,6 +139,19 @@
 
                     }
 
+                    if (game.input.activePointer.isDown) {
+
+                        setBallVelocity(paddle, ball);
+
+                        // start ball roll animation
+                        ball.animations.play('roll');
+
+                        // switch to game mode
+                        //modes.currentMode = 'game';
+                        modes.switchMode('game', this);
+
+                    }
+
                     // text
                     game.world.getByName('text-0').text = 'round: ' + game.data.round + ' score: ' + game.data.score;
                     game.world.getByName('text-1').text = 'lives: ' + game.data.lives;
