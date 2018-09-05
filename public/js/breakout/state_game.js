@@ -15,7 +15,7 @@
             var setup = modes[modes.currentMode].setup;
 
             if (setup) {
-                setup.call(context);
+                setup.call(this);
             }
 
         },
@@ -81,8 +81,7 @@
                     centerPaddle(paddle);
 
                     // set back to serve mode
-                    //modes.currentMode = 'serve';
-                    modes.switchMode('serve', this);
+                    modes.switchMode.call(this, 'serve');
 
                 }
 
@@ -112,7 +111,7 @@
 
                 // switch to game mode
                 //modes.currentMode = 'game';
-                modes.switchMode('game', this);
+                modes.switchMode.call(this, 'game');
 
             };
 
@@ -316,12 +315,12 @@
 
                     centerPaddle(paddle);
                     //modes.currentMode = 'serve';
-                    modes.switchMode('serve', this);
+                    modes.switchMode.call(this, 'serve');
 
                 } else {
 
                     //modes.currentMode = 'gameover';
-                    modes.switchMode('gameover', this);
+                    modes.switchMode.call(this, 'gameover');
 
                 }
 
@@ -363,20 +362,20 @@
 
                     console.log('game paused');
 
-                    modes.switchMode('pause', this);
+                    modes.switchMode.call(this, 'pause');
                     return;
 
                 }
 
                 if (modes.currentMode === 'pause') {
 
-                    modes.switchMode('game', this);
+                    modes.switchMode.call(this, 'game');
 
                 }
 
             })
 
-            modes.switchMode('serve', this);
+            modes.switchMode.call(this, 'serve');
 
         },
 
@@ -389,15 +388,9 @@
             // check keyboard
             var keyboard = game.input.keyboard;
 
+            // call the tick method for the current mode
             modes[modes.currentMode].tick.call(this, keyboard, paddle, ball);
 
-            // text display
-            //game.world.getByName('text-0').text = 'round: ' + game.data.round + ' score: ' + game.data.score;
-            //game.world.getByName('text-1').text = 'lives: ' + game.data.lives;
-            //game.world.getByName('text-2').text = 'ballSpeed: ' + game.data.ballSpeed;
-            //game.world.getByName('text-0').text = 'ball-velocity: ' + ball.body.velocity.x + ',' + ball.body.velocity.y;
-            //game.world.getByName('text-1').text = 'ball-position: ' + Math.floor(ball.x) + ',' + Math.floor(ball.y);
-            //game.world.getByName('text-2').text = 'blocks alive: ' + Blocks.countAlive();
         }
 
     });
