@@ -9,13 +9,16 @@
 
         switchMode: function (mode, context) {
 
+            var paddle = this.game.world.getByName('paddle'),
+            ball = this.game.world.getByName('ball');
+
             modes.currentMode = mode;
 
             // call the states setup methods if it has one
             var setup = modes[modes.currentMode].setup;
 
             if (setup) {
-                setup.call(this);
+                setup.call(this, paddle, ball);
             }
 
         },
@@ -23,10 +26,7 @@
         // normal game flow
         game: {
 
-            setup: function () {
-
-                var paddle = this.game.world.getByName('paddle'),
-                ball = this.game.world.getByName('ball');
+            setup: function (paddle, ball) {
 
                 loadBallVelocity(ball);
 
@@ -164,9 +164,7 @@
         // game over mode
         gameover: {
 
-            setup: function () {
-
-                var paddle = this.game.world.getByName('paddle');
+            setup: function (paddle) {
 
                 // default paddle velocity to zero
                 paddle.body.velocity.set(0, 0);
