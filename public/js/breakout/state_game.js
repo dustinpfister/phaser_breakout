@@ -373,6 +373,9 @@
 
             })
 
+            // setup features
+            Features.onGameStart.call(this);
+
             modes.switchMode.call(this, 'serve');
 
         },

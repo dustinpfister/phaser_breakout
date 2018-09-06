@@ -8,4 +8,13 @@ var Features = {
 
     },
 
+    // set up features for a new game
+    onGameStart: function () {
+
+        var data = this.game.data;
+
+        data.lives = data.lives_start + data.lives_won - data.lives_lost;
+
+    }
+
 };

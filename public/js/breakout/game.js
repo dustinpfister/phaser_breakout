@@ -5,7 +5,12 @@ game.data = {
 
     frameData: {},
     score: 0,
-    lives: 3,
+
+    lives: 0, // will be set by formula in mod_features
+    lives_start: 3,
+    lives_won: 0,
+    lives_lost: 0,
+
     round: 1,
     ballSpeed: 100
 
