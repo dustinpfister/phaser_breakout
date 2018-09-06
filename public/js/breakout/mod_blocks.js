@@ -134,6 +134,8 @@ var Blocks = {
 
         this.game.data.score += points;
 
+        Features.onScore.call(this);
+
     }
 
 };
