@@ -153,6 +153,7 @@
                     // text
                     game.world.getByName('text-0').text = 'round: ' + game.data.round + ' score: ' + game.data.score;
                     game.world.getByName('text-1').text = 'lives: ' + game.data.lives;
+                    game.world.getByName('text-2').text = 'lives_lost: ' + game.data.lives_lost;
 
                 }
 
@@ -307,7 +308,9 @@
             ball.checkWorldBounds = true;
             ball.events.onOutOfBounds.add(function () {
 
-                game.data.lives -= 1;
+                //game.data.lives -= 1;
+                //game.data.lives.lost += 1;
+                Features.onBallLost.call(this)
 
                 if (game.data.lives > 0) {
 

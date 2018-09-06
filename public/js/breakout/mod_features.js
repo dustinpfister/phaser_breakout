@@ -15,6 +15,16 @@ var Features = {
 
         data.lives = data.lives_start + data.lives_won - data.lives_lost;
 
+    },
+
+    onBallLost: function () {
+
+        var data = this.game.data;
+
+        data.lives_lost += 1;
+
+        data.lives = data.lives_start + data.lives_won - data.lives_lost;
+
     }
 
 };
