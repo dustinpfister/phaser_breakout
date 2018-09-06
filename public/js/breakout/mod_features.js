@@ -4,7 +4,11 @@ var Features = {
     // up during a game
     onScore: function () {
 
-        console.log('score: ' + this.game.data.score);
+        var data = this.game.data;
+
+        data.lives_won = Math.floor(data.score / 1000);
+
+        data.lives = data.lives_start + data.lives_won - data.lives_lost;
 
     },
 
