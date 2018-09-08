@@ -290,7 +290,7 @@
 
             // Setup blocks
             //Blocks.setup();
-			Blocks.createBlockPool();
+            Blocks.createBlockPool();
 
             // mk text objects
             mkTextObjects({

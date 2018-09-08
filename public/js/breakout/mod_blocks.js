@@ -47,13 +47,6 @@ var Blocks = {
             sprite.width = this.blockWidth;
             sprite.height = this.blockHeight;
 
-            // physics
-            game.physics.enable(sprite);
-            sprite.body.immovable = true;
-
-            sprite.body.onCollide = new Phaser.Signal();
-            sprite.body.onCollide.add(this.onCollide, sprite);
-
             // push to blocks array
             this.blocks.push(sprite);
 
@@ -73,15 +66,25 @@ var Blocks = {
         i = 0;
 
         level = level || 1;
+
+        console.log(this.blocks);
         while (i < count) {
 
             yPer = Math.floor(i / this.gridWidth) / this.gridHeight;
 
             sprite = this.blocks[i];
 
+            // enable physics here
+            if (!sprite.body) {
+                game.physics.enable(sprite);
+            }
+            sprite.body.enable = true;
+            sprite.body.immovable = true;
+            sprite.body.onCollide = new Phaser.Signal();
+            sprite.body.onCollide.add(this.onCollide, sprite);
+
             sprite.data.hp = 1 + Math.floor((1 - yPer) * 2);
             sprite.frame = sprite.data.hp - 1;
-            sprite.body.enable = true;
             sprite.alpha = 1
 
                 i += 1;
