@@ -267,6 +267,9 @@
 
         create: function () {
 
+            var ball = game.world.getByName('ball'),
+            paddle = game.world.getByName('paddle');
+
             game.data = game.data || {};
 
             // set to round 1
@@ -277,22 +280,6 @@
             game.data.lives_start = 3;
             game.data.lives_won = 0;
             game.data.lives_lost = 0;
-
-            // ball
-			/*
-            var ball = game.add.sprite(0, 0, 'ball', 0),
-            fd = game.data.frameData['ball'];
-            ball.name = 'ball';
-            ball.animations.add('roll', fd, 60, true);
-            // ball.animations.play('roll');
-
-            // paddle
-            var paddle = game.add.sprite(0, 0, 'paddle', 0);
-            paddle.name = 'paddle';
-			*/
-			
-			var ball = game.world.getByName('ball'),
-			paddle = game.world.getByName('paddle');
 
             centerPaddle(paddle);
 

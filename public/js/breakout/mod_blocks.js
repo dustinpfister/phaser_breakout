@@ -87,7 +87,7 @@ var Blocks = {
 
             sprite.x = this.sx + x;
             sprite.y = this.sy + y;
-            sprite.data.hp = 1; //1 + Math.floor((1 - yPer) * 2);
+            sprite.data.hp = 1 + Math.floor((1 - yPer) * 2);
             sprite.frame = sprite.data.hp - 1;
             sprite.alpha = 1;
 
