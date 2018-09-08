@@ -9,21 +9,18 @@ var Blocks = {
 
         this.game = opt.game || game;
         this.sheetKey = 'blocks';
-        this.gridWidth = 12;
+        this.gridWidth = 10;
         this.gridHeight = 8;
 
-        //var blockWidth = (this.game.width / (this.gridWidth+2));
+        // number of block lengths on the sides
+        this.blockWidthAjust = 2;
 
-        this.blockWidth = this.game.width / (this.gridWidth + 2);
+        this.blockWidth = this.game.width / (this.gridWidth + (2 * this.blockWidthAjust));
         this.blockHeight = 8;
-        this.sx = this.blockWidth;
+        this.sx = this.blockWidth + this.blockWidth * (this.blockWidthAjust - 1);
         this.sy = 32;
 
-        console.log(this.blockWidth);
-
         this.blocks = [];
-
-        //this.createBlockPool(this.sheetKey, this.gridWidth * this.gridHeight);
 
     },
 
