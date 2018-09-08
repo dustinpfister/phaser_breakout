@@ -9,11 +9,11 @@ var Blocks = {
 
         this.game = opt.game || game;
         this.sheetKey = 'blocks';
-        this.gridWidth = 3;
+        this.gridWidth = 8;
         this.gridHeight = 8;
-        this.blockWidth = this.game.width / (this.gridWidth+ 1);
+        this.blockWidth = this.game.width / (this.gridWidth+ 2);
         this.blockHeight = 8;
-        this.sx = 32;
+        this.sx = this.blockWidth;
         this.sy = 32;
 
         this.blocks = [];
