@@ -179,7 +179,7 @@
                 // if up on keyboard
                 if (keyboard.isDown(38)) {
 
-                    game.state.start('game');
+                    game.state.start('game',false,false);
 
                 }
 
@@ -290,7 +290,8 @@
 
             // Setup blocks
             //Blocks.setup();
-            Blocks.createBlockPool();
+            //Blocks.createBlockPool();
+			Blocks.setupDataObjects()
 
             // mk text objects
             mkTextObjects({

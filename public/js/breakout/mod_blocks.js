@@ -63,14 +63,16 @@ var Blocks = {
         var count = this.blocks.length,
         sprite,
         yPer,
+        x,
+        y,
         i = 0;
 
         level = level || 1;
-
-        console.log(this.blocks);
         while (i < count) {
 
             yPer = Math.floor(i / this.gridWidth) / this.gridHeight;
+            x = i % this.gridWidth * this.blockWidth;
+            y = Math.floor(i / this.gridWidth) * this.blockHeight;
 
             sprite = this.blocks[i];
 
@@ -83,13 +85,17 @@ var Blocks = {
             sprite.body.onCollide = new Phaser.Signal();
             sprite.body.onCollide.add(this.onCollide, sprite);
 
-            sprite.data.hp = 1 + Math.floor((1 - yPer) * 2);
+            sprite.x = this.sx + x;
+            sprite.y = this.sy + y;
+            sprite.data.hp = 1; //1 + Math.floor((1 - yPer) * 2);
             sprite.frame = sprite.data.hp - 1;
-            sprite.alpha = 1
+            sprite.alpha = 1;
 
-                i += 1;
+            i += 1;
 
         }
+
+        console.log('block length: ' + this.blocks.length);
 
     },
 

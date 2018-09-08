@@ -78,13 +78,15 @@ game.state.add('mksheets', {
                 ctx.lineWidth = 3;
                 ctx.fillRect(0, 0, this.w, this.h);
 
-                ctx.strokeRect(0.5, 0.5, this.w-1, this.h-1);
+                ctx.strokeRect(0.5, 0.5, this.w - 1, this.h - 1);
 
             }
 
         });
 
-        game.state.start('game');
+        Blocks.createBlockPool();
+
+        game.state.start('game', false, false);
 
     }
 

@@ -20,7 +20,7 @@ game.state.add('boot', {
         // Setup blocks module
         Blocks.setup();
 
-        game.state.start('mksheets');
+        game.state.start('mksheets',false,false);
 
     }
 
