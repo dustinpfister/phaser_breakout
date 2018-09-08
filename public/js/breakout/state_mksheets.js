@@ -75,11 +75,11 @@ game.state.add('mksheets', {
 
                 // set color by frame
                 ctx.fillStyle = colors[this.f];
-                ctx.strokeStyle = 'rgba(255,255,255,.5)';
-                ctx.lineWidth = 1;
+                ctx.strokeStyle = 'rgba(255,255,255,.2)';
+                ctx.lineWidth = 3;
                 ctx.fillRect(0, 0, this.w, this.h);
 
-                ctx.strokeRect(0, 1, 31, 7);
+                ctx.strokeRect(0.5, 0.5, this.w-1, this.h-1);
 
             }
 
