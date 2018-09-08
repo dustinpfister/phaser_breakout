@@ -2,33 +2,39 @@ var Blocks = {
 
     blocks: [],
 
-    // this is to be called in the create method of the game state
+    // this is to be called in the boot state
     setup: function (opt) {
 
         opt = opt || {};
 
         this.game = opt.game || game;
         this.sheetKey = 'blocks';
-        this.gridWidth = 8;
+        this.gridWidth = 10;
         this.gridHeight = 8;
-        this.blockWidth = this.game.width / (this.gridWidth+ 2);
+
+        //var blockWidth = (this.game.width / (this.gridWidth+2));
+
+        this.blockWidth = this.game.width / (this.gridWidth + 2);
         this.blockHeight = 8;
         this.sx = this.blockWidth;
         this.sy = 32;
 
+        console.log(this.blockWidth);
+
         this.blocks = [];
 
-        this.createBlockPool(this.sheetKey, this.gridWidth * this.gridHeight);
+        //this.createBlockPool(this.sheetKey, this.gridWidth * this.gridHeight);
 
     },
 
-    // create a block pool with the given sheet key
-    createBlockPool: function (sheetKey, count) {
+    // create a block pool, this is to be called in the create method of the game state
+    createBlockPool: function () {
 
         var i = 0,
         x,
         y,
-        sprite;
+        sprite,
+        count = this.gridWidth * this.gridHeight;
 
         // for total block count
         while (i < count) {
@@ -37,7 +43,7 @@ var Blocks = {
             y = Math.floor(i / this.gridWidth) * this.blockHeight;
 
             // create sprite for block
-            sprite = this.game.add.sprite(0, 0, 'blocks', 2);
+            sprite = this.game.add.sprite(0, 0, this.sheetKey, 2);
             sprite.name = 'block-' + i;
             sprite.x = this.sx + x;
             sprite.y = this.sy + y;
@@ -75,7 +81,8 @@ var Blocks = {
             sprite = this.blocks[i];
 
             sprite.data.hp = 1 + Math.floor((1 - yPer) * 2);
-            sprite.frame = sprite.data.hp - 1;
+            //sprite.frame = sprite.data.hp - 1;
+            sprite.frame = 0;
             sprite.body.enable = true;
             sprite.alpha = 1
 

@@ -289,7 +289,8 @@
             centerPaddle(paddle);
 
             // Setup blocks
-            Blocks.setup();
+            //Blocks.setup();
+			Blocks.createBlockPool();
 
             // mk text objects
             mkTextObjects({
