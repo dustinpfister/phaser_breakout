@@ -9,12 +9,12 @@ var Blocks = {
 
         this.game = opt.game || game;
         this.sheetKey = 'blocks';
-        this.gridWidth = 11;
+        this.gridWidth = 12;
         this.gridHeight = 8;
 
         //var blockWidth = (this.game.width / (this.gridWidth+2));
 
-        this.blockWidth = Math.round(this.game.width / (this.gridWidth + 2));
+        this.blockWidth = this.game.width / (this.gridWidth + 2);
         this.blockHeight = 8;
         this.sx = this.blockWidth;
         this.sy = 32;
@@ -47,6 +47,8 @@ var Blocks = {
             sprite.name = 'block-' + i;
             sprite.x = this.sx + x;
             sprite.y = this.sy + y;
+            sprite.width = this.blockWidth;
+            sprite.height = this.blockHeight;
 
             // physics
             game.physics.enable(sprite);

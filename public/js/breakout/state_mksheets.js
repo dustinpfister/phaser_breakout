@@ -66,8 +66,7 @@ game.state.add('mksheets', {
             name: 'blocks',
             game: game,
             frames: 3,
-            //frameWidth: 32,
-            frameWidth: Blocks.blockWidth,
+            frameWidth: 16,
             frameHeight: 8,
             forFrame: function (ctx) {
 
