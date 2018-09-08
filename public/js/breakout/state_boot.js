@@ -17,6 +17,9 @@ game.state.add('boot', {
         // will be using physics
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
+        // Setup blocks module
+        Blocks.setup();
+
         game.state.start('mksheets');
 
     }

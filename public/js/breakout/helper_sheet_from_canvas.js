@@ -46,6 +46,8 @@ var sheetFromCanvas = function (opt) {
             p2: Math.PI * 2,
             hw: opt.frameWidth / 2,
             hh: opt.frameHeight / 2,
+            w: opt.frameWidth,
+            h: opt.frameHeight,
             sx: sx,
             per: per,
             canvas: canvas,
