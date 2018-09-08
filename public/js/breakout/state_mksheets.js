@@ -77,9 +77,7 @@ game.state.add('mksheets', {
                 ctx.fillStyle = colors[this.f];
                 ctx.strokeStyle = 'rgba(255,255,255,.5)';
                 ctx.lineWidth = 1;
-                ctx.fillRect(0, 0, this.w, 8);
-
-                console.log(Blocks.blockWidth)
+                ctx.fillRect(0, 0, this.w, this.h);
 
                 ctx.strokeRect(0, 1, 31, 7);
 
