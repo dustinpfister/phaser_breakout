@@ -84,7 +84,20 @@ game.state.add('mksheets', {
 
         });
 
+        // create block sprites
         Blocks.createBlockPool();
+
+        // ball and paddle sprites
+
+        var ball = game.add.sprite(0, 0, 'ball', 0),
+        fd = game.data.frameData['ball'];
+        ball.name = 'ball';
+        ball.animations.add('roll', fd, 60, true);
+
+
+        // paddle
+        var paddle = game.add.sprite(0, 0, 'paddle', 0);
+        paddle.name = 'paddle';
 
         game.state.start('game', false, false);
 

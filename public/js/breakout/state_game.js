@@ -179,7 +179,7 @@
                 // if up on keyboard
                 if (keyboard.isDown(38)) {
 
-                    game.state.start('game',false,false);
+                    game.state.start('game', false, false);
 
                 }
 
@@ -273,9 +273,13 @@
             setRound(game, 1);
 
             // start with three lives
-            game.data.lives = 3;
+            //game.data.lives = 3;
+            game.data.lives_start = 3;
+            game.data.lives_won = 0;
+            game.data.lives_lost = 0;
 
             // ball
+			/*
             var ball = game.add.sprite(0, 0, 'ball', 0),
             fd = game.data.frameData['ball'];
             ball.name = 'ball';
@@ -285,13 +289,17 @@
             // paddle
             var paddle = game.add.sprite(0, 0, 'paddle', 0);
             paddle.name = 'paddle';
+			*/
+			
+			var ball = game.world.getByName('ball'),
+			paddle = game.world.getByName('paddle');
 
             centerPaddle(paddle);
 
             // Setup blocks
             //Blocks.setup();
             //Blocks.createBlockPool();
-			Blocks.setupDataObjects()
+            Blocks.setupDataObjects()
 
             // mk text objects
             mkTextObjects({
