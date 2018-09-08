@@ -9,12 +9,12 @@ var Blocks = {
 
         this.game = opt.game || game;
         this.sheetKey = 'blocks';
-        this.gridWidth = 10;
+        this.gridWidth = 11;
         this.gridHeight = 8;
 
         //var blockWidth = (this.game.width / (this.gridWidth+2));
 
-        this.blockWidth = this.game.width / (this.gridWidth + 2);
+        this.blockWidth = Math.round(this.game.width / (this.gridWidth + 2));
         this.blockHeight = 8;
         this.sx = this.blockWidth;
         this.sy = 32;
@@ -81,8 +81,7 @@ var Blocks = {
             sprite = this.blocks[i];
 
             sprite.data.hp = 1 + Math.floor((1 - yPer) * 2);
-            //sprite.frame = sprite.data.hp - 1;
-            sprite.frame = 0;
+            sprite.frame = sprite.data.hp - 1;
             sprite.body.enable = true;
             sprite.alpha = 1
 
