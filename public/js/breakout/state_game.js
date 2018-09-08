@@ -153,7 +153,7 @@
                     // text
                     game.world.getByName('text-0').text = 'round: ' + game.data.round + ' score: ' + game.data.score;
                     game.world.getByName('text-1').text = 'lives: ' + game.data.lives;
-                    game.world.getByName('text-2').text = 'lives_lost: ' + game.data.lives_lost;
+                    //game.world.getByName('text-2').text = 'lives_lost: ' + game.data.lives_lost;
 
                 }
 

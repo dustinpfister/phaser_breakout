@@ -1,6 +1,6 @@
 {
   "name": "phaser_breakout",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "This is a phaser powered game about orbs that are used in turn based matches against an AI.",
   "main": "app.js",
   "dependencies": {

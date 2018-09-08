@@ -13,7 +13,7 @@ var Blocks = {
         this.gridHeight = 8;
 
         // number of block lengths on the sides
-        this.blockWidthAjust = 2;
+        this.blockWidthAjust = 1.25;
 
         this.blockWidth = this.game.width / (this.gridWidth + (2 * this.blockWidthAjust));
         this.blockHeight = 8;
