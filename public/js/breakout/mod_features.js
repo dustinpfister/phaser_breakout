@@ -21,9 +21,8 @@ var Features = {
     setRound: function (round) {
 
         Features.round = round;
-        Features.ballBlockHits = 0;
 
-        Features.setBallSpeed();
+        Features.onRoundStart();
 
     },
 
@@ -97,7 +96,20 @@ var Features = {
 
     },
 
-    onRoundStart: function () {},
+    // each time a new round starts
+    onRoundStart: function () {
+
+        Features.ballBlockHits = 0;
+        Features.setBallSpeed();
+
+    },
+
+    // eac time a new serve starts
+    onNewServe: function () {
+
+        Features.ballBlockHits = 0;
+
+    },
 
     /********** BALL EVENTS **********/
 

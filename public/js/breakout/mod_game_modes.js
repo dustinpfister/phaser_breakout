@@ -184,6 +184,12 @@ var GameModes = (function () {
 
             return {
 
+                setup: function () {
+
+                    Features.onNewServe();
+
+                },
+
                 tick: function (keyboard, paddle, ball) {
 
                     var game = this.game,
@@ -227,6 +233,7 @@ var GameModes = (function () {
                     // text
                     game.world.getByName('text-0').text = 'round: ' + Features.round + ' score: ' + game.data.score;
                     game.world.getByName('text-1').text = 'lives: ' + game.data.lives;
+                    game.world.getByName('text-2').text = 'ball-speed: ' + Features.ballSpeed + '; block hits ' + Features.ballBlockHits;
                     //game.world.getByName('text-2').text = 'ball-speed: ' + Features.ballSpeed + '; block hits ' + Features.ballBlockHits;
                     //game.world.getByName('text-3').text = 'ball-speed: ' + Features.ballSpeed;
                     //game.world.getByName('text-2').text = 'lives_lost: ' + game.data.lives_lost;
