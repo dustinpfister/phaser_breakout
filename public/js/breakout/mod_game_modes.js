@@ -87,7 +87,7 @@ var GameModes = (function () {
 
                 loadBallVelocity(ball);
 
-                centerPaddle(paddle);
+                //centerPaddle(paddle);
 
             },
 

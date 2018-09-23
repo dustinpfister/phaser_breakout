@@ -94,18 +94,16 @@
 
             pauseKey.onUp.add(function () {
 
-                if (modes.currentMode === 'game') {
+                if (GameModes.currentMode === 'game') {
 
                     console.log('game paused');
 
-                    modes.switchMode.call(this, 'pause');
+                    GameModes.switchMode.call(this, 'pause');
                     return;
 
-                }
+                }else{
 
-                if (modes.currentMode === 'pause') {
-
-                    modes.switchMode.call(this, 'game');
+                    GameModes.switchMode.call(this, 'game');
 
                 }
 
