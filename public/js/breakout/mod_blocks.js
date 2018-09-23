@@ -121,39 +121,34 @@ var Blocks = {
     // what happens when the ball hits a block
     onCollide: function () {
 
+        Features.onBlockHit(this);
+
         // the block sprite should be this
-        var sprite = this,
-        points = 0;
+        /*
+        var sprite = this;
 
-        // set score to zero if it is not there
-        //this.game.data = this.game.data || {};
-        //this.game.data.score = this.game.data.score || 0;
-
+        // block hp is always lost
         sprite.data.hp -= 1;
 
-        // always get hit score
-        //points += Features.perBlockHit;
         Features.onBlockHit.call(this);
 
         if (sprite.data.hp <= 0) {
 
-            sprite.data.hp = 0;
-            sprite.body.enable = false;
-            sprite.alpha = 0;
+        sprite.data.hp = 0;
+        sprite.body.enable = false;
+        sprite.alpha = 0;
 
-            Features.onBlockKill.call(this);
+        Features.onBlockKill.call(this);
 
-            // points += Features.perBlockKill;
 
         } else {
 
-            sprite.frame = sprite.data.hp - 1;
+        sprite.frame = sprite.data.hp - 1;
 
         }
+         */
 
-        //this.game.data.score += points;
-
-        Features.onScore.call(this);
+        //Features.onScore.call(this);
 
     }
 

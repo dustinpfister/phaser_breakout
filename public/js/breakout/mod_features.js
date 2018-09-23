@@ -3,25 +3,47 @@ var Features = {
     perBlockHit: 10,
     perBlockKill: 25,
 
-    onBlockHit: function () {
+    // ball values
+    ballDamage: 3,
 
-        this.game.data.score += Features.perBlockHit;
-        Features.onScore.call(this);
+    // each time a block is hit
+    onBlockHit: function (sprite) {
+
+        // block hp is always lost
+        sprite.data.hp -= Features.ballDamage;
+
+        if (sprite.data.hp <= 0) {
+
+            sprite.data.hp = 0;
+            sprite.body.enable = false;
+            sprite.alpha = 0;
+
+            Features.onBlockKill(sprite);
+
+        } else {
+
+            sprite.frame = Math.floor(sprite.data.hp - 1);
+
+        }
+
+        sprite.game.data.score += Features.perBlockHit;
+        Features.onScore(sprite.game);
 
     },
 
-    onBlockKill: function () {
+    // each time a block is killed
+    onBlockKill: function (sprite) {
 
-        this.game.data.score += Features.perBlockKill;
-        Features.onScore.call(this);
+        sprite.game.data.score += Features.perBlockKill;
+        Features.onScore(sprite.game);
 
     },
 
     // to be called each time the players score goes
     // up during a game
-    onScore: function () {
+    onScore: function (game) {
 
-        var data = this.game.data;
+        var data = game.data;
 
         data.lives_won = Math.floor(data.score / 1000);
 
