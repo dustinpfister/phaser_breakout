@@ -8,6 +8,7 @@ var Features = {
     perBlockKill: 25,
 
     // ball values
+    ball: null, // reference to ball sprite
     ballBlockHits: 0, // used with speed formula
     ballDamage: 3,
     ballSpeed: 10,
@@ -29,7 +30,16 @@ var Features = {
     // ball speed formula
     setBallSpeed: function () {
 
-        Features.ballSpeed = 200 + 50 * (Features.round - 1);
+        var hitUp = 1.5;
+
+        if (Features.ballBlockHits < 50) {
+            hitUp = 1 + Features.ballBlockHits / 50 * .5;
+
+        }
+
+        Features.ballSpeed = Math.floor((200 + 50 * (Features.round - 1)) * hitUp);
+
+        console.log(Features.ballSpeed);
 
     },
 
@@ -42,6 +52,7 @@ var Features = {
 
         // block hits
         Features.ballBlockHits += 1;
+        Features.setBallSpeed();
 
         // block hp is always lost
         sprite.data.hp -= Features.ballDamage;

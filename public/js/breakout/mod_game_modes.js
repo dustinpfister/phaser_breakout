@@ -34,8 +34,6 @@ var GameModes = (function () {
                 x: paddle.x,
                 y: paddle.y
             }) + Math.PI,
-        //x = Math.cos(angleToPaddle) * game.data.ballSpeed,
-        //y = Math.sin(angleToPaddle) * game.data.ballSpeed;
 
         x = Math.cos(angleToPaddle) * Features.ballSpeed,
         y = Math.sin(angleToPaddle) * Features.ballSpeed;
