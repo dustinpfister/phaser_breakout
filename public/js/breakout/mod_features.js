@@ -8,15 +8,28 @@ var Features = {
     perBlockKill: 25,
 
     // ball values
+    ballBlockHits: 0, // used with speed formula
     ballDamage: 3,
     ballSpeed: 10,
 
     // paddle
     paddleAngle: 75, // max angle range from center to left or right in degrees
 
+    /********** FEATURES **********/
+
+    // set the current round
     setRound: function (round) {
 
         Features.round = round;
+        Features.ballBlockHits = 0;
+
+        Features.setBallSpeed();
+
+    },
+
+    // ball speed formula
+    setBallSpeed: function () {
+
         Features.ballSpeed = 200 + 50 * (Features.round - 1);
 
     },
@@ -27,6 +40,9 @@ var Features = {
 
     // each time a block is hit
     onBlockHit: function (sprite) {
+
+        // block hits
+        Features.ballBlockHits += 1;
 
         // block hp is always lost
         sprite.data.hp -= Features.ballDamage;
