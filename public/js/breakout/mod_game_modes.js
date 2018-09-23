@@ -153,7 +153,7 @@ var GameModes = (function () {
 
                 // text
                 game.world.getByName('text-0').text = 'round: ' + Features.round + ' score: ' + game.data.score;
-                game.world.getByName('text-1').text = 'lives: ' + game.data.lives;
+                game.world.getByName('text-1').text = 'lives: ' + game.data.lives + ' start,won,lost: ' + game.data.lives_start+ ',' + game.data.lives_won+',' + game.data.lives_lost;
                 game.world.getByName('text-2').text = 'ball-speed: ' + Features.ballSpeed + '; block hits ' + Features.ballBlockHits;
 
             }
@@ -165,7 +165,7 @@ var GameModes = (function () {
 
             var tick = 0,
             game = this.game,
-            totalTicks = 150,
+            totalTicks = 50,
             dist = 100,
             startAngle = -Math.PI + Math.PI / 180 * 45;
 

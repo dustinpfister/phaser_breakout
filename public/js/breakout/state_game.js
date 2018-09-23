@@ -40,22 +40,28 @@
             ball.body.collideWorldBounds = true;
             ball.body.bounce.set(1);
             ball.checkWorldBounds = true;
+
             ball.events.onOutOfBounds.add(function () {
 
-                //game.data.lives -= 1;
-                //game.data.lives.lost += 1;
-                Features.onBallLost.call(this)
+                // ??? I have to do this because for some reason
+                // the event fires even when the ball is not out of bounds
+                // during serve mode
+                if (GameModes.currentMode === 'game') {
 
-                if (game.data.lives > 0) {
+                    Features.onBallLost.call(this);
 
-                    //centerPaddle(paddle);
-                    //modes.currentMode = 'serve';
-                    GameModes.switchMode.call(this, 'serve');
+                    if (game.data.lives > 0) {
 
-                } else {
+                        //centerPaddle(paddle);
+                        //modes.currentMode = 'serve';
+                        GameModes.switchMode.call(this, 'serve');
 
-                    //modes.currentMode = 'gameover';
-                    GameModes.switchMode.call(this, 'gameover');
+                    } else {
+
+                        //modes.currentMode = 'gameover';
+                        GameModes.switchMode.call(this, 'gameover');
+
+                    }
 
                 }
 
