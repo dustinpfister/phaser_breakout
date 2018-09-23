@@ -40,7 +40,6 @@ var GameModes = (function () {
         x = Math.cos(angleToPaddle) * Features.ballSpeed,
         y = Math.sin(angleToPaddle) * Features.ballSpeed;
 
-
         // set ball velocity
         ball.body.velocity.set(x, y);
         saveBallVelocity(ball);
@@ -225,7 +224,7 @@ var GameModes = (function () {
                     }
 
                     // text
-                    game.world.getByName('text-0').text = 'round: ' + game.data.round + ' score: ' + game.data.score;
+                    game.world.getByName('text-0').text = 'round: ' + Features.round + ' score: ' + game.data.score;
                     game.world.getByName('text-1').text = 'lives: ' + game.data.lives;
                     game.world.getByName('text-2').text = 'ball-speed: ' + Features.ballSpeed;
                     //game.world.getByName('text-2').text = 'lives_lost: ' + game.data.lives_lost;
@@ -254,6 +253,8 @@ var GameModes = (function () {
 
                 // if up on keyboard
                 if (keyboard.isDown(38)) {
+
+                    Features.setRound(1);
 
                     game.state.start('game', false, false);
 
@@ -286,6 +287,13 @@ var GameModes = (function () {
         }
 
     };
+
+    api.newGame = function () {
+
+        Features.setRound(1);
+
+    };
+
     /*
     // set round method
     api.setRound = function (game, round) {

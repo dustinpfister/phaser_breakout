@@ -9,14 +9,15 @@ var Features = {
 
     // ball values
     ballDamage: 3,
-    ballSpeed: 100,
+    ballSpeed: 10,
 
     // paddle
     paddleAngle: 75, // max angle range from center to left or right in degrees
 
-    setRound: function (game, round) {
+    setRound: function (round) {
 
-        Features.ballSpeed = 200 + 50 * (this.round - 1);
+        Features.round = round;
+        Features.ballSpeed = 200 + 50 * (Features.round - 1);
 
     },
 

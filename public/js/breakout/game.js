@@ -11,7 +11,7 @@ game.data = {
     lives_won: 0,
     lives_lost: 0,
 
-    round: 1,
-    ballSpeed: 100
+    //round: 1,
+    //ballSpeed: 100
 
 };

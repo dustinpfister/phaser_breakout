@@ -11,7 +11,9 @@
 
             // set to round 1
             //GameModes.setRound(game, 1);
-            Features.setRound(1);
+            //Features.setRound(1);
+			
+			GameModes.newGame();
 
             // start with three lives
             //game.data.lives = 3;
