@@ -17,10 +17,10 @@ var GameModes = (function () {
     // set round method
     var setRound = function (game, round) {
 
-        game.data.round = round;
+        //game.data.round = round;
 
         // ball speed formula
-        game.data.ballSpeed = Math.floor(100 + 25 * round);
+        //game.data.ballSpeed = Math.floor(100 + 25 * round);
 
     };
 
@@ -34,8 +34,12 @@ var GameModes = (function () {
                 x: paddle.x,
                 y: paddle.y
             }) + Math.PI,
-        x = Math.cos(angleToPaddle) * game.data.ballSpeed,
-        y = Math.sin(angleToPaddle) * game.data.ballSpeed;
+        //x = Math.cos(angleToPaddle) * game.data.ballSpeed,
+        //y = Math.sin(angleToPaddle) * game.data.ballSpeed;
+
+        x = Math.cos(angleToPaddle) * Features.ballSpeed,
+        y = Math.sin(angleToPaddle) * Features.ballSpeed;
+
 
         // set ball velocity
         ball.body.velocity.set(x, y);
@@ -43,7 +47,7 @@ var GameModes = (function () {
 
     };
 
-    // sve ball velocity
+    // save ball velocity
     var saveBallVelocity = function (ball) {
 
         ball.data.saveVelocity = new Phaser.Point(ball.body.velocity.x, ball.body.velocity.y);
@@ -70,6 +74,8 @@ var GameModes = (function () {
             ball = this.game.world.getByName('ball');
 
             GameModes.currentMode = mode;
+
+            //api.setRound.call(this);
 
             // call the states setup methods if it has one
             var setup = GameModes[GameModes.currentMode].setup;
@@ -132,7 +138,9 @@ var GameModes = (function () {
                 if (Blocks.countAlive() === 0) {
 
                     // start new round!
-                    setRound(game, game.data.round += 1);
+                    //setRound(game, game.data.round += 1);
+
+                    Features.setRound(Features.round += 1);
 
                     // just set up another set for now
                     Blocks.setupDataObjects();
@@ -145,7 +153,7 @@ var GameModes = (function () {
                 }
 
                 // text
-                game.world.getByName('text-0').text = 'round: ' + game.data.round + ' score: ' + game.data.score;
+                game.world.getByName('text-0').text = 'round: ' + Features.round + ' score: ' + game.data.score;
                 game.world.getByName('text-1').text = 'lives: ' + game.data.lives;
 
             }
@@ -219,6 +227,7 @@ var GameModes = (function () {
                     // text
                     game.world.getByName('text-0').text = 'round: ' + game.data.round + ' score: ' + game.data.score;
                     game.world.getByName('text-1').text = 'lives: ' + game.data.lives;
+                    game.world.getByName('text-2').text = 'ball-speed: ' + Features.ballSpeed;
                     //game.world.getByName('text-2').text = 'lives_lost: ' + game.data.lives_lost;
 
 
@@ -277,15 +286,17 @@ var GameModes = (function () {
         }
 
     };
-
+    /*
+    // set round method
     api.setRound = function (game, round) {
 
-        game.data.round = round;
+    //game.data.round = round;
 
-        // ball speed formula
-        game.data.ballSpeed = Math.floor(100 + 25 * round);
+    // ball speed formula
+    //game.data.ballSpeed = Math.floor(100 + 25 * round);
 
     };
+     */
 
     return api;
 

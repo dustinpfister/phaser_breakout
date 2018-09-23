@@ -10,7 +10,8 @@
             game.data = game.data || {};
 
             // set to round 1
-            GameModes.setRound(game, 1);
+            //GameModes.setRound(game, 1);
+            Features.setRound(1);
 
             // start with three lives
             //game.data.lives = 3;
@@ -101,7 +102,7 @@
                     GameModes.switchMode.call(this, 'pause');
                     return;
 
-                }else{
+                } else {
 
                     GameModes.switchMode.call(this, 'game');
 

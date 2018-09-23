@@ -1,13 +1,28 @@
 var Features = {
 
+    //round
+    round: 1,
+
+    // score
     perBlockHit: 10,
     perBlockKill: 25,
 
     // ball values
     ballDamage: 3,
+    ballSpeed: 100,
 
     // paddle
     paddleAngle: 75, // max angle range from center to left or right in degrees
+
+    setRound: function (game, round) {
+
+        Features.ballSpeed = 200 + 50 * (this.round - 1);
+
+    },
+
+    /********** EVENTS **********/
+
+    /********** SCORE EVENTS **********/
 
     // each time a block is hit
     onBlockHit: function (sprite) {
@@ -54,6 +69,8 @@ var Features = {
 
     },
 
+    /********** GAME EVENTS **********/
+
     // set up features for a new game
     onGameStart: function () {
 
@@ -62,6 +79,10 @@ var Features = {
         data.lives = data.lives_start + data.lives_won - data.lives_lost;
 
     },
+
+    onRoundStart: function () {},
+
+    /********** BALL EVENTS **********/
 
     // each time the player looses a ball
     onBallLost: function () {
@@ -74,13 +95,18 @@ var Features = {
 
     },
 
+    /********** PADDLE EVENTS **********/
+
     // when the ball collides with the paddle
     onPaddleBallCollide: function (paddle, ball, per, dir, fromCenter) {
 
         var a = -Math.PI / 2 - Math.PI / 180 * Features.paddleAngle * per * dir;
 
-        x = Math.floor(Math.cos(a) * game.data.ballSpeed);
-        y = Math.floor(Math.sin(a) * game.data.ballSpeed);
+        //x = Math.floor(Math.cos(a) * game.data.ballSpeed);
+        //y = Math.floor(Math.sin(a) * game.data.ballSpeed);
+
+        x = Math.floor(Math.cos(a) * Features.ballSpeed);
+        y = Math.floor(Math.sin(a) * Features.ballSpeed);
 
         ball.body.velocity.set(x, y);
 
