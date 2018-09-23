@@ -3,11 +3,15 @@
 // the update method of the game state
 var GameModes = (function () {
 
-    // Helpers
+    // Internal Helpers
     var centerPaddle = function (paddle) {
+
         paddle.x = game.world.centerX;
         paddle.y = game.world.height - 16;
         paddle.anchor.set(0.5, 0.5);
+
+        paddle.body.collideWorldBounds = true;
+
     };
 
     // set round method
@@ -54,6 +58,7 @@ var GameModes = (function () {
 
     };
 
+    // PUBLIC API
     var api = {
 
         currentMode: 'serve',
@@ -171,14 +176,6 @@ var GameModes = (function () {
 
             return {
 
-                setup: function () {
-
-                    var paddle = this.game.world.getByName('paddle');
-
-                    centerPaddle(paddle);
-
-                },
-
                 tick: function (keyboard, paddle, ball) {
 
                     var game = this.game,
@@ -200,8 +197,14 @@ var GameModes = (function () {
                     tick += 1;
                     tick %= totalTicks;
 
+                    // ??? center paddle has to be called on each tick
+                    // because of a weird problem with body.collideWorldBounds
+                    centerPaddle(paddle);
+
                     // if up on keyboard
                     if (keyboard.isDown(38)) {
+
+                        console.log(paddle.x);
 
                         serveBall.call(this, paddle, ball);
 
@@ -217,6 +220,7 @@ var GameModes = (function () {
                     game.world.getByName('text-0').text = 'round: ' + game.data.round + ' score: ' + game.data.score;
                     game.world.getByName('text-1').text = 'lives: ' + game.data.lives;
                     //game.world.getByName('text-2').text = 'lives_lost: ' + game.data.lives_lost;
+
 
                 }
 

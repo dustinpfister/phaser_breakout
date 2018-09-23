@@ -60,7 +60,7 @@
             }, this);
 
             paddle.body.immovable = true;
-            paddle.body.collideWorldBounds = true;
+            //paddle.body.collideWorldBounds = true;
 
             paddle.body.onCollide = new Phaser.Signal();
             paddle.body.onCollide.add(function () {
@@ -84,7 +84,9 @@
 
                 ball.body.velocity.set(x, y);
 
+
             });
+
 
             // pause key
             var pauseKey = game.input.keyboard.addKey(65);
