@@ -6,6 +6,9 @@ var Features = {
     // ball values
     ballDamage: 3,
 
+    // paddle
+    paddleAngle: 75, // max angle range from center to left or right in degrees
+
     // each time a block is hit
     onBlockHit: function (sprite) {
 
@@ -68,6 +71,18 @@ var Features = {
         data.lives_lost += 1;
 
         data.lives = data.lives_start + data.lives_won - data.lives_lost;
+
+    },
+
+    // when the ball collides with the paddle
+    onPaddleBallCollide: function (paddle, ball, per, dir, fromCenter) {
+
+        var a = -Math.PI / 2 - Math.PI / 180 * Features.paddleAngle * per * dir;
+
+        x = Math.floor(Math.cos(a) * game.data.ballSpeed);
+        y = Math.floor(Math.sin(a) * game.data.ballSpeed);
+
+        ball.body.velocity.set(x, y);
 
     }
 
