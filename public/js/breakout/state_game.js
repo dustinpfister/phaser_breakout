@@ -34,6 +34,7 @@
             // physics
             game.physics.enable([ball, paddle]);
 
+
             // no downward collision
             game.physics.arcade.checkCollision.down = false;
 
@@ -66,6 +67,16 @@
                 }
 
             }, this);
+
+            ball.body.onCollide = new Phaser.Signal();
+            ball.body.onWorldBounds = new Phaser.Signal()
+                //ball.body.onCollide.add(function () {
+                ball.body.onWorldBounds.add(function () {
+                    console.log('yes');
+
+                    //Ball.set(Ball.ball.body.angle, Features.ballSpeed);
+
+                });
 
             paddle.body.immovable = true;
             //paddle.body.collideWorldBounds = true;
@@ -137,6 +148,9 @@
 
             // call the tick method for the current mode
             GameModes[GameModes.currentMode].tick.call(this, keyboard, paddle, ball);
+
+            // on angle change event
+            Ball.tick();
 
         }
 

@@ -89,7 +89,7 @@ game.state.add('mksheets', {
 
         // ball and paddle sprites
 
-        var ball = Features.ball = game.add.sprite(0, 0, 'ball', 0),
+        var ball = Ball.ball = game.add.sprite(0, 0, 'ball', 0),
         fd = game.data.frameData['ball'];
         ball.name = 'ball';
         ball.animations.add('roll', fd, 60, true);

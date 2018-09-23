@@ -33,13 +33,16 @@ var GameModes = (function () {
             }, {
                 x: paddle.x,
                 y: paddle.y
-            }) + Math.PI,
+            }) + Math.PI;
 
-        x = Math.cos(angleToPaddle) * Features.ballSpeed,
-        y = Math.sin(angleToPaddle) * Features.ballSpeed;
+        //x = Math.cos(angleToPaddle) * Features.ballSpeed,
+        //y = Math.sin(angleToPaddle) * Features.ballSpeed;
 
         // set ball velocity
-        ball.body.velocity.set(x, y);
+        //ball.body.velocity.set(x, y);
+
+        Ball.set(angleToPaddle, Features.ballSpeed);
+
         saveBallVelocity(ball);
 
     };
@@ -151,8 +154,10 @@ var GameModes = (function () {
 
                 // text
                 game.world.getByName('text-0').text = 'round: ' + Features.round + ' score: ' + game.data.score;
-                game.world.getByName('text-1').text = 'lives: ' + game.data.lives + ' start,won,lost: ' + game.data.lives_start+ ',' + game.data.lives_won+',' + game.data.lives_lost;
+                game.world.getByName('text-1').text = 'lives: ' + game.data.lives + ' start,won,lost: ' + game.data.lives_start + ',' + game.data.lives_won + ',' + game.data.lives_lost;
                 game.world.getByName('text-2').text = 'ball-speed: ' + Features.ballSpeed + '; block hits ' + Features.ballBlockHits;
+
+                //game.world.getByName('text-2').text = 'ball.body.angle: ' + Ball.ball.body.angle;
 
             }
         },
@@ -170,6 +175,7 @@ var GameModes = (function () {
             var serveBall = function (paddle, ball) {
 
                 setBallVelocity(paddle, ball);
+                Ball.tempAngle = Ball.ball.body.angle;
 
                 // start ball roll animation
                 ball.animations.play('roll');
