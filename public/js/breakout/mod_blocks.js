@@ -126,10 +126,14 @@ var Blocks = {
         points = 0;
 
         // set score to zero if it is not there
-        this.game.data = this.game.data || {};
-        this.game.data.score = this.game.data.score || 0;
+        //this.game.data = this.game.data || {};
+        //this.game.data.score = this.game.data.score || 0;
 
         sprite.data.hp -= 1;
+
+        // always get hit score
+        //points += Features.perBlockHit;
+        Features.onBlockHit.call(this);
 
         if (sprite.data.hp <= 0) {
 
@@ -137,16 +141,17 @@ var Blocks = {
             sprite.body.enable = false;
             sprite.alpha = 0;
 
-            points += 100;
+            Features.onBlockKill.call(this);
+
+            // points += Features.perBlockKill;
 
         } else {
 
             sprite.frame = sprite.data.hp - 1;
-            points += 10;
 
         }
 
-        this.game.data.score += points;
+        //this.game.data.score += points;
 
         Features.onScore.call(this);
 

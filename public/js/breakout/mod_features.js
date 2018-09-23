@@ -1,5 +1,22 @@
 var Features = {
 
+    perBlockHit: 10,
+    perBlockKill: 25,
+
+    onBlockHit: function () {
+
+        this.game.data.score += Features.perBlockHit;
+        Features.onScore.call(this);
+
+    },
+
+    onBlockKill: function () {
+
+        this.game.data.score += Features.perBlockKill;
+        Features.onScore.call(this);
+
+    },
+
     // to be called each time the players score goes
     // up during a game
     onScore: function () {
@@ -21,6 +38,7 @@ var Features = {
 
     },
 
+    // each time the player looses a ball
     onBallLost: function () {
 
         var data = this.game.data;
