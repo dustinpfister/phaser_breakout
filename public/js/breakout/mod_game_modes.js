@@ -269,6 +269,9 @@ var GameModes = (function () {
 
                     Features.setRound(1);
 
+                    // reset score
+                    game.data.score = 0;
+
                     game.state.start('game', false, false);
 
                 }
