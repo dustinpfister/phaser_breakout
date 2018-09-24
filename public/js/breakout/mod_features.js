@@ -2,6 +2,7 @@ var Features = {
 
     //round
     round: 1,
+    score: 0,
 
     // score
     perBlockHit: 10,
@@ -70,7 +71,7 @@ var Features = {
 
         }
 
-        sprite.game.data.score += Features.perBlockHit;
+        Features.score += Features.perBlockHit;
         Features.onScore(sprite.game);
 
     },
@@ -78,7 +79,7 @@ var Features = {
     // each time a block is killed
     onBlockKill: function (sprite) {
 
-        sprite.game.data.score += Features.perBlockKill;
+        Features.score += Features.perBlockKill;
         Features.onScore(sprite.game);
 
     },
@@ -89,7 +90,7 @@ var Features = {
 
         var data = game.data;
 
-        data.lives_won = Math.floor(data.score / 1000);
+        data.lives_won = Math.floor(Features.score / 1000);
 
         data.lives = data.lives_start + data.lives_won - data.lives_lost;
 
@@ -111,6 +112,13 @@ var Features = {
 
         Features.ballBlockHits = 0;
         Features.setBallSpeed();
+
+    },
+
+    // called once each time a round ends
+    onRoundEnd: function () {
+
+        console.log('round is over');
 
     },
 

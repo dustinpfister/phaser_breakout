@@ -153,7 +153,7 @@ var GameModes = (function () {
                 }
 
                 // text
-                game.world.getByName('text-0').text = 'round: ' + Features.round + ' score: ' + game.data.score;
+                game.world.getByName('text-0').text = 'round: ' + Features.round + ' score: ' + Features.score;
                 game.world.getByName('text-1').text = 'lives: ' + game.data.lives + ' start,won,lost: ' + game.data.lives_start + ',' + game.data.lives_won + ',' + game.data.lives_lost;
                 game.world.getByName('text-2').text = 'ball-speed: ' + Features.ballSpeed + '; block hits ' + Features.ballBlockHits;
 
@@ -235,7 +235,7 @@ var GameModes = (function () {
                     }
 
                     // text
-                    game.world.getByName('text-0').text = 'round: ' + Features.round + ' score: ' + game.data.score;
+                    game.world.getByName('text-0').text = 'round: ' + Features.round + ' score: ' + Features.score;
                     game.world.getByName('text-1').text = 'lives: ' + game.data.lives;
                     game.world.getByName('text-2').text = 'ball-speed: ' + Features.ballSpeed + '; block hits ' + Features.ballBlockHits;
                     //game.world.getByName('text-2').text = 'ball-speed: ' + Features.ballSpeed + '; block hits ' + Features.ballBlockHits;
@@ -255,11 +255,14 @@ var GameModes = (function () {
 
             setup: function (paddle) {
 
+                // file the on round end event
+                Features.onRoundEnd();
+
                 // default paddle velocity to zero
                 paddle.body.velocity.set(0, 0);
 
                 game.world.getByName('text-0').text = 'Game Over - press up arrow on keyboard to restart';
-                game.world.getByName('text-1').text = 'score: ' + this.game.data.score;
+                game.world.getByName('text-1').text = 'score: ' + Features.score;
 
             },
             tick: function (keyboard, paddle, ball) {
@@ -270,7 +273,7 @@ var GameModes = (function () {
                     Features.setRound(1);
 
                     // reset score
-                    game.data.score = 0;
+                    Features.score = 0;
 
                     game.state.start('game', false, false);
 
