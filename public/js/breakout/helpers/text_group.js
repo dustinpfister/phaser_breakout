@@ -1,5 +1,5 @@
 // make a bunch of text display objects
-var mkTextObjects = function (opt) {
+var TextGroup = function (opt) {
 
     opt = opt || {};
     opt.game = opt.game || game;
@@ -12,15 +12,24 @@ var mkTextObjects = function (opt) {
         font: opt.size + 'px courier'
     };
 
+    var group = game.add.group();
+    group.name = opt.name || '';
+    group.x = opt.sx;
+    group.y = opt.sx;
+
     var i = 0,
     text;
     while (i < opt.count) {
 
-        text = opt.game.add.text(opt.sx, opt.sy + opt.size * i, '', opt.font);
+        text = opt.game.add.text(0, opt.size * i, '', opt.font);
         text.name = 'text-' + i;
+
+        group.add(text);
 
         i += 1;
 
     }
+
+    return group;
 
 };

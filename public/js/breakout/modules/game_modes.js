@@ -3,6 +3,16 @@
 // the update method of the game state
 var GameModes = (function () {
 
+    // print debug info
+    var debug = function () {
+
+        var group = game.world.getByName('debug').children;
+
+        group[0].text = 'round: ' + Features.round + ', score: ' + Features.score + ', lives: ' + game.data.lives;
+        group[1].text = 'ball speed: ' + Features.ballSpeed;
+
+    };
+
     // Internal Helpers
     var centerPaddle = function (paddle) {
 
@@ -11,16 +21,6 @@ var GameModes = (function () {
         paddle.anchor.set(0.5, 0.5);
 
         paddle.body.collideWorldBounds = true;
-
-    };
-
-    // set round method
-    var setRound = function (game, round) {
-
-        //game.data.round = round;
-
-        // ball speed formula
-        //game.data.ballSpeed = Math.floor(100 + 25 * round);
 
     };
 
@@ -34,12 +34,6 @@ var GameModes = (function () {
                 x: paddle.x,
                 y: paddle.y
             }) + Math.PI;
-
-        //x = Math.cos(angleToPaddle) * Features.ballSpeed,
-        //y = Math.sin(angleToPaddle) * Features.ballSpeed;
-
-        // set ball velocity
-        //ball.body.velocity.set(x, y);
 
         Ball.set(angleToPaddle, Features.ballSpeed);
 
@@ -75,8 +69,6 @@ var GameModes = (function () {
 
             GameModes.currentMode = mode;
 
-            //api.setRound.call(this);
-
             // call the states setup methods if it has one
             var setup = GameModes[GameModes.currentMode].setup;
 
@@ -92,8 +84,6 @@ var GameModes = (function () {
             setup: function (paddle, ball) {
 
                 loadBallVelocity(ball);
-
-                //centerPaddle(paddle);
 
             },
 
@@ -137,9 +127,6 @@ var GameModes = (function () {
 
                 if (Blocks.countAlive() === 0) {
 
-                    // start new round!
-                    //setRound(game, game.data.round += 1);
-
                     Features.setRound(Features.round += 1);
 
                     // just set up another set for now
@@ -152,12 +139,7 @@ var GameModes = (function () {
 
                 }
 
-                // text
-                game.world.getByName('text-0').text = 'round: ' + Features.round + ' score: ' + Features.score;
-                game.world.getByName('text-1').text = 'lives: ' + game.data.lives + ' start,won,lost: ' + game.data.lives_start + ',' + game.data.lives_won + ',' + game.data.lives_lost;
-                game.world.getByName('text-2').text = 'ball-speed: ' + Features.ballSpeed + '; block hits ' + Features.ballBlockHits;
-
-                //game.world.getByName('text-2').text = 'ball.body.angle: ' + Ball.ball.body.angle;
+                debug();
 
             }
         },
@@ -181,7 +163,6 @@ var GameModes = (function () {
                 ball.animations.play('roll');
 
                 // switch to game mode
-                //GameModes.currentMode = 'game';
                 GameModes.switchMode.call(this, 'game');
 
             };
@@ -234,14 +215,7 @@ var GameModes = (function () {
 
                     }
 
-                    // text
-                    game.world.getByName('text-0').text = 'round: ' + Features.round + ' score: ' + Features.score;
-                    game.world.getByName('text-1').text = 'lives: ' + game.data.lives;
-                    game.world.getByName('text-2').text = 'ball-speed: ' + Features.ballSpeed + '; block hits ' + Features.ballBlockHits;
-                    //game.world.getByName('text-2').text = 'ball-speed: ' + Features.ballSpeed + '; block hits ' + Features.ballBlockHits;
-                    //game.world.getByName('text-3').text = 'ball-speed: ' + Features.ballSpeed;
-                    //game.world.getByName('text-2').text = 'lives_lost: ' + game.data.lives_lost;
-
+                    debug();
 
                 }
 
@@ -261,8 +235,9 @@ var GameModes = (function () {
                 // default paddle velocity to zero
                 paddle.body.velocity.set(0, 0);
 
-                game.world.getByName('text-0').text = 'Game Over - press up arrow on keyboard to restart';
-                game.world.getByName('text-1').text = 'score: ' + Features.score;
+                debug();
+
+                game.world.getByName('debug').children[1].text = 'Game Over - press up arrow on keyboard to restart';
 
             },
             tick: function (keyboard, paddle, ball) {
@@ -299,7 +274,7 @@ var GameModes = (function () {
 
                 ball.body.velocity.set(0, 0);
 
-                game.world.getByName('text-0').text = 'Game Paused - Press \'a\' key to continue.';
+                //game.world.getByName('text-0').text = 'Game Paused - Press \'a\' key to continue.';
 
             }
 
@@ -307,23 +282,24 @@ var GameModes = (function () {
 
     };
 
+    // what needs to get done once for GameStates
+    api.setup = function () {
+
+        TextGroup({
+            name: 'debug',
+            sx: 10,
+            sy: 10,
+            count: 4
+        });
+
+    };
+
+    // call to set up a new game
     api.newGame = function () {
 
         Features.setRound(1);
 
     };
-
-    /*
-    // set round method
-    api.setRound = function (game, round) {
-
-    //game.data.round = round;
-
-    // ball speed formula
-    //game.data.ballSpeed = Math.floor(100 + 25 * round);
-
-    };
-     */
 
     return api;
 

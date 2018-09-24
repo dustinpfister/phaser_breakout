@@ -26,14 +26,17 @@
             Blocks.setupDataObjects()
 
             // mk text objects
+            /*
             mkTextObjects({
-                game: game,
-                count: 3
+            game: game,
+            count: 3
             });
+             */
+
+GameModes.setup();
 
             // physics
             game.physics.enable([ball, paddle]);
-
 
             // no downward collision
             game.physics.arcade.checkCollision.down = false;

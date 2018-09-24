@@ -12,7 +12,7 @@ var Features = {
     ballSpeed: 10,
     ballBlockHits: 0, // used with speed formula
     ballBlockHitMulti: 0.75,
-    ballBlockHitOverHits: 10,
+    ballBlockHitOverHits: 100,
 
     ballDamage: 1,
 
