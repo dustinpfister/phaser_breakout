@@ -8,10 +8,12 @@ var Features = {
     perBlockKill: 25,
 
     // ball values
-    ball: null, // reference to ball sprite
-    ballBlockHits: 0, // used with speed formula
-    ballDamage: 3,
     ballSpeed: 10,
+    ballBlockHits: 0, // used with speed formula
+    ballBlockHitMulti: 0.75,
+    ballBlockHitOverHits: 10,
+
+    ballDamage: 1,
 
     // paddle
     paddleAngle: 75, // max angle range from center to left or right in degrees
@@ -30,14 +32,13 @@ var Features = {
     // ball speed formula
     setBallSpeed: function () {
 
-        var hitUp = 1.5;
+        var hitUp = 1 + Features.ballBlockHitMulti;
 
-        if (Features.ballBlockHits < 50) {
-            hitUp = 1 + Features.ballBlockHits / 50 * .75;
-
+        if (Features.ballBlockHits < Features.ballBlockHitOverHits) {
+            hitUp = 1 + Features.ballBlockHits / Features.ballBlockHitOverHits * Features.ballBlockHitMulti;
         }
 
-        Features.ballSpeed = Math.floor((200 + 50 * (Features.round - 1)) * hitUp);
+        Features.ballSpeed = Math.floor((125 + 50 * (Features.round - 1)) * hitUp);
 
     },
 
