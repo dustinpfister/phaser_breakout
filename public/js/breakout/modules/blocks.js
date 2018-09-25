@@ -1,3 +1,13 @@
+/***********
+blocks.js
+
+Just a reminder of what this file is for
+
+    * BLOCKS ARRAY - stores an array of sprites for each block
+    * METHODS - contains methods that act on the array of blocks
+
+***********/
+
 var Blocks = {
 
     blocks: [],

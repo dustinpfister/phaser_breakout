@@ -1,7 +1,17 @@
-// more than one mode for the game
-// these are different methods that will be used in
-// the update method of the game state
+/***********
+game_modes.js
+
+Just a reminder of what this file is for
+
+    * INTERNAL HELPERS - any helper method for the game modes
+    * API - a public api that can be used to set the current game mode, setup the module and so forth
+    * GAME MODES - different update methods to be called in the main update method of the game state
+
+***********/
+
 var GameModes = (function () {
+
+    // Internal Helpers
 
     // print debug info
     var debug = function () {
@@ -13,7 +23,7 @@ var GameModes = (function () {
 
     };
 
-    // Internal Helpers
+    // center the paddle
     var centerPaddle = function (paddle) {
         paddle.x = game.world.centerX;
         paddle.y = game.world.height - 16;

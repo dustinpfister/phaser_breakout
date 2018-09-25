@@ -1,3 +1,14 @@
+/***********
+Features.js
+
+Just a reminder of what this file is for
+
+    * VARIABLES - Stores the state of many variables for things like Score, and Ball Speed
+    * FEATURES - contains feature methods that set some of these values such as Ball Speed
+    * EVENTS - Contains events that define what needs to happen when a ball hits a block, and much more
+
+***********/
+
 var Features = {
 
     //round
@@ -19,7 +30,7 @@ var Features = {
     // paddle
     paddleAngle: 75, // max angle range from center to left or right in degrees
 
-    /********** FEATURES **********/
+    /********** SETUP **********/
 
     // set the current round
     setRound: function (round) {
@@ -29,6 +40,8 @@ var Features = {
         Features.onRoundStart();
 
     },
+
+    /********** FEATURES **********/
 
     // ball speed formula
     setBallSpeed: function () {
@@ -45,7 +58,7 @@ var Features = {
 
     /********** EVENTS **********/
 
-    /********** SCORE EVENTS **********/
+    /********** BLOCK EVENTS **********/
 
     // each time a block is hit
     onBlockHit: function (sprite) {
@@ -83,6 +96,8 @@ var Features = {
         Features.onScore(sprite.game);
 
     },
+
+    /********** SCORE EVENTS **********/
 
     // to be called each time the players score goes
     // up during a game
