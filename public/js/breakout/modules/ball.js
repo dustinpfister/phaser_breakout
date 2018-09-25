@@ -1,3 +1,12 @@
+/***********
+ball.js
+
+Just a reminder of what this file is for
+
+    * BALL SPRITE - holds a reference to the ball sprite
+    * METHODS - Methods for Setting up the ball, and what to do on each tick
+
+***********/
 var Ball = {
 
     ball: null, // a ref to the ball sprite
