@@ -11,7 +11,7 @@ var Features = {
     // ball values
     ballSpeed: 10,
     ballBlockHits: 0, // used with speed formula
-    ballBlockHitMulti: 0.75,
+    ballBlockHitMulti: 0.80,
     ballBlockHitOverHits: 100,
 
     ballDamage: 1,
@@ -118,7 +118,10 @@ var Features = {
     // called once each time a round ends
     onRoundEnd: function () {
 
-        console.log('round is over');
+        Features.setRound(Features.round += 1);
+
+        // just set up another set for now
+        Blocks.setupDataObjects();
 
     },
 
@@ -126,6 +129,7 @@ var Features = {
     onNewServe: function () {
 
         Features.ballBlockHits = 0;
+        Features.setBallSpeed();
 
     },
 

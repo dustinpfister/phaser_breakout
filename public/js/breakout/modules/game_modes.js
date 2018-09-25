@@ -15,13 +15,9 @@ var GameModes = (function () {
 
     // Internal Helpers
     var centerPaddle = function (paddle) {
-
         paddle.x = game.world.centerX;
         paddle.y = game.world.height - 16;
         paddle.anchor.set(0.5, 0.5);
-
-        paddle.body.collideWorldBounds = true;
-
     };
 
     // set ball velocity
@@ -127,10 +123,8 @@ var GameModes = (function () {
 
                 if (Blocks.countAlive() === 0) {
 
-                    Features.setRound(Features.round += 1);
-
-                    // just set up another set for now
-                    Blocks.setupDataObjects();
+                    // fire the on round end event
+                    Features.onRoundEnd();
 
                     centerPaddle(paddle);
 
@@ -228,9 +222,6 @@ var GameModes = (function () {
         gameover: {
 
             setup: function (paddle) {
-
-                // file the on round end event
-                Features.onRoundEnd();
 
                 // default paddle velocity to zero
                 paddle.body.velocity.set(0, 0);

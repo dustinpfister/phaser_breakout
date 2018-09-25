@@ -9,31 +9,18 @@
 
             game.data = game.data || {};
 
-            // set to round 1
-            //GameModes.setRound(game, 1);
-            //Features.setRound(1);
-            GameModes.newGame();
-
             // start with three lives
             //game.data.lives = 3;
             game.data.lives_start = 3;
             game.data.lives_won = 0;
             game.data.lives_lost = 0;
 
-            //centerPaddle(paddle);
-
             // Setup blocks
             Blocks.setupDataObjects()
 
-            // mk text objects
-            /*
-            mkTextObjects({
-            game: game,
-            count: 3
-            });
-             */
-
-GameModes.setup();
+            // setup game modes, start new game
+            GameModes.setup();
+            GameModes.newGame();
 
             // physics
             game.physics.enable([ball, paddle]);
@@ -71,19 +58,8 @@ GameModes.setup();
 
             }, this);
 
-            ball.body.onCollide = new Phaser.Signal();
-            ball.body.onWorldBounds = new Phaser.Signal()
-                //ball.body.onCollide.add(function () {
-                ball.body.onWorldBounds.add(function () {
-                    console.log('yes');
-
-                    //Ball.set(Ball.ball.body.angle, Features.ballSpeed);
-
-                });
-
             paddle.body.immovable = true;
-            //paddle.body.collideWorldBounds = true;
-
+            paddle.body.collideWorldBounds = true;
             paddle.body.onCollide = new Phaser.Signal();
             paddle.body.onCollide.add(function () {
 
@@ -98,14 +74,6 @@ GameModes.setup();
 
                 // clamp per
                 per = Phaser.Math.clamp(per, 0, 1);
-
-                /*
-                a = aUp - Math.PI / 180 * Features.paddleAngle * per * dir;
-                x = Math.floor(Math.cos(a) * game.data.ballSpeed);
-                y = Math.floor(Math.sin(a) * game.data.ballSpeed);
-
-                ball.body.velocity.set(x, y);
-                 */
 
                 Features.onPaddleBallCollide(paddle, ball, per, dir, fromCenter);
 
@@ -133,9 +101,6 @@ GameModes.setup();
 
             // setup features
             Features.onGameStart.call(this);
-
-            //modes.switchMode.call(this, 'serve');
-
             GameModes.switchMode.call(this, 'serve');
 
         },
