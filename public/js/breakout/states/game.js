@@ -32,6 +32,11 @@
             ball.body.bounce.set(1);
             ball.checkWorldBounds = true;
 
+            // set the ball body immovable to true
+            // to make the ball plow threw blocks rather than
+            // bounce off of them
+            ball.body.immovable = false;
+
             ball.events.onOutOfBounds.add(function () {
 
                 // ??? I have to do this because for some reason

@@ -123,33 +123,6 @@ var Blocks = {
 
         Features.onBlockHit(this);
 
-        // the block sprite should be this
-        /*
-        var sprite = this;
-
-        // block hp is always lost
-        sprite.data.hp -= 1;
-
-        Features.onBlockHit.call(this);
-
-        if (sprite.data.hp <= 0) {
-
-        sprite.data.hp = 0;
-        sprite.body.enable = false;
-        sprite.alpha = 0;
-
-        Features.onBlockKill.call(this);
-
-
-        } else {
-
-        sprite.frame = sprite.data.hp - 1;
-
-        }
-         */
-
-        //Features.onScore.call(this);
-
     }
 
 };
