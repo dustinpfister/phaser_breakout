@@ -22,46 +22,13 @@
             GameModes.setup();
             GameModes.newGame();
 
-            // physics
-            game.physics.enable([ball, paddle]);
-
             // no downward collision
             game.physics.arcade.checkCollision.down = false;
 
-            ball.body.collideWorldBounds = true;
-            ball.body.bounce.set(1);
-            ball.checkWorldBounds = true;
+            // physics
+            game.physics.enable(paddle);
 
-            // set the ball body immovable to true
-            // to make the ball plow threw blocks rather than
-            // bounce off of them
-            ball.body.immovable = false;
-
-            ball.events.onOutOfBounds.add(function () {
-
-                // ??? I have to do this because for some reason
-                // the event fires even when the ball is not out of bounds
-                // during serve mode
-                if (GameModes.currentMode === 'game') {
-
-                    Features.onBallLost.call(this);
-
-                    if (game.data.lives > 0) {
-
-                        //centerPaddle(paddle);
-                        //modes.currentMode = 'serve';
-                        GameModes.switchMode.call(this, 'serve');
-
-                    } else {
-
-                        //modes.currentMode = 'gameover';
-                        GameModes.switchMode.call(this, 'gameover');
-
-                    }
-
-                }
-
-            }, this);
+            Ball.setup.call(this);
 
             paddle.body.immovable = true;
             paddle.body.collideWorldBounds = true;
