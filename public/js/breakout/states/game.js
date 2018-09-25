@@ -1,3 +1,12 @@
+/***********
+game.js
+
+Just a reminder of what this file is for
+
+    * GAME STATE - the main Game state object
+
+***********/
+
 (function () {
 
     game.state.add('game', {
