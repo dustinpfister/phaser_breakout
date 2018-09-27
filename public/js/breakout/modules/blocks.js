@@ -3,14 +3,15 @@ blocks.js
 
 Just a reminder of what this file is for
 
-    * BLOCKS ARRAY - stores an array of sprites for each block
-    * METHODS - contains methods that act on the array of blocks
+ * BLOCKS ARRAY - stores an array of sprites for each block
+ * METHODS - contains methods that act on the array of blocks
 
-***********/
+ ***********/
 
 var Blocks = {
 
-    blocks: [],
+    //blocks: [],
+    blocks: null,
 
     // this is to be called in the boot state
     setup: function (opt) {
@@ -19,7 +20,7 @@ var Blocks = {
 
         this.game = opt.game || game;
         this.sheetKey = 'blocks';
-        this.gridWidth = 10;//10;
+        this.gridWidth = 10; //10;
         this.gridHeight = 9; //8;
 
         // number of block lengths on the sides
@@ -30,7 +31,8 @@ var Blocks = {
         this.sx = this.blockWidth + this.blockWidth * (this.blockWidthAjust - 1);
         this.sy = 32;
 
-        this.blocks = [];
+        //this.blocks = [];
+        this.blocks = this.game.add.group();
 
     },
 
@@ -58,7 +60,8 @@ var Blocks = {
             sprite.height = this.blockHeight;
 
             // push to blocks array
-            this.blocks.push(sprite);
+            //this.blocks.push(sprite);
+            this.blocks.add(sprite);
 
             i += 1;
         }
@@ -84,7 +87,8 @@ var Blocks = {
             x = i % this.gridWidth * this.blockWidth;
             y = Math.floor(i / this.gridWidth) * this.blockHeight;
 
-            sprite = this.blocks[i];
+            //sprite = this.blocks[i];
+            sprite = this.blocks.children[i];
 
             // enable physics here
             if (!sprite.body) {
