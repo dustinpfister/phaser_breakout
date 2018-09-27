@@ -3,9 +3,9 @@ game.js
 
 Just a reminder of what this file is for
 
-    * GAME STATE - the main Game state object
+ * GAME STATE - the main Game state object
 
-***********/
+ ***********/
 
 (function () {
 
@@ -17,6 +17,10 @@ Just a reminder of what this file is for
             paddle = game.world.getByName('paddle');
 
             game.data = game.data || {};
+
+            // make sure game sprites are visible
+            Blocks.blocks.visible = true;
+            Ball.ball.visible = true;
 
             // start with three lives
             //game.data.lives = 3;

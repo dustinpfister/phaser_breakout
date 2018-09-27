@@ -13,9 +13,10 @@ game.state.add('title', {
 
     create: function () {
 
-	    
-	
-	
+        // make game sprites not visible
+        Blocks.blocks.visible = false;
+        Ball.ball.visible = false;
+
         game.state.start('game', false, false);
 
     }
