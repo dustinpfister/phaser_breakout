@@ -45,26 +45,7 @@ Just a reminder of what this file is for
             // setup paddle
             Paddle.setup.call(this);
 
-            paddle.body.immovable = true;
-            paddle.body.collideWorldBounds = true;
-            paddle.body.onCollide = new Phaser.Signal();
-            paddle.body.onCollide.add(function () {
-
-                var max = paddle.width / 2 + ball.width / 2,
-                fromCenter = Math.abs(ball.x - paddle.x),
-                dir = ball.x - paddle.x < 0 ? 1 : -1;
-                per = fromCenter / max,
-                x = 0,
-                y = 0,
-                aUp = -Math.PI / 2,
-                a = aUp;
-
-                // clamp per
-                per = Phaser.Math.clamp(per, 0, 1);
-
-                Features.onPaddleBallCollide(paddle, ball, per, dir, fromCenter);
-
-            });
+            
 
             // pause key
             var pauseKey = game.input.keyboard.addKey(65);
