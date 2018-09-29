@@ -14,6 +14,17 @@ var Upgrades = {
    
    points: 6,
    
+   upgrades : {
+	   
+	   // reduce the base speed of the ball, that gets raised with each round
+	   BallSpeedBaseReduce : {
+		   
+		   points: 0,
+		   
+		   
+	   }
+	   
+   },
    
    setUpgrade : function(){
 	   

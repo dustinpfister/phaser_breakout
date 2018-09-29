@@ -3,11 +3,11 @@ Features.js
 
 Just a reminder of what this file is for
 
-    * VARIABLES - Stores the state of many variables for things like Score, and Ball Speed
-    * FEATURES - contains feature methods that set some of these values such as Ball Speed
-    * EVENTS - Contains events that define what needs to happen when a ball hits a block, and much more
+ * VARIABLES - Stores the state of many variables for things like Score, and Ball Speed
+ * FEATURES - contains feature methods that set some of these values such as Ball Speed
+ * EVENTS - Contains events that define what needs to happen when a ball hits a block, and much more
 
-***********/
+ ***********/
 
 var Features = {
 
@@ -21,6 +21,7 @@ var Features = {
 
     // ball values
     ballSpeed: 10,
+    ballSpeedBase: 50,
     ballBlockHits: 0, // used with speed formula
     ballBlockHitMulti: 0.80,
     ballBlockHitOverHits: 100,
@@ -52,7 +53,7 @@ var Features = {
             hitUp = 1 + Features.ballBlockHits / Features.ballBlockHitOverHits * Features.ballBlockHitMulti;
         }
 
-        Features.ballSpeed = Math.floor((125 + 50 * (Features.round - 1)) * hitUp);
+        Features.ballSpeed = Math.floor((125 + Features.ballSpeedBase * (Features.round - 1)) * hitUp);
 
     },
 
