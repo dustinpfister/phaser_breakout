@@ -39,9 +39,11 @@ Just a reminder of what this file is for
             game.physics.arcade.checkCollision.down = false;
 
             // physics
-            game.physics.enable(paddle);
+            //game.physics.enable(paddle);
 
             Ball.setup.call(this);
+            // setup paddle
+            Paddle.setup.call(this);
 
             paddle.body.immovable = true;
             paddle.body.collideWorldBounds = true;
