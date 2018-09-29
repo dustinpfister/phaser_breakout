@@ -298,7 +298,7 @@ var GameModes = (function () {
     // call to set up a new game
     api.newGame = function () {
 
-        Features.setRound(1);
+        Features.setRound(30);
 
     };
 

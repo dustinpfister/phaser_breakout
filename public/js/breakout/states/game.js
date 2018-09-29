@@ -18,6 +18,11 @@ Just a reminder of what this file is for
 
             game.data = game.data || {};
 
+            // upgrades
+
+            // calling first upgrade like this for now until I have a better system
+            Upgrades.upgrades.BallSpeedBaseReduce.set();
+
             // make sure game sprites are visible
             Blocks.blocks.visible = true;
             Ball.ball.visible = true;
@@ -44,8 +49,6 @@ Just a reminder of what this file is for
             Ball.setup.call(this);
             // setup paddle
             Paddle.setup.call(this);
-
-            
 
             // pause key
             var pauseKey = game.input.keyboard.addKey(65);
