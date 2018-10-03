@@ -20,23 +20,20 @@ var Upgrades = {
         {
             name: 'Ball Speed Base Reduce',
             desc: 'Reduces the base speed of the ball to begin with that is then raised via other factors',
-            points: 0,
-            pointsMax: 10,
+            points: 100,
+            pointsMax: 100,
             set: function () {
-                var per = this.points / this.pointsMax;
-                Features.ballSpeedBase = Math.floor(30.2 - 25 * per);
+                Features.ballSpeedBase = 30.2 - 25 * this.per;
+
             }
         },
-
         {
             name: 'Increase ball speed block hits',
             desc: 'Reduces Ball speed by increasing the number of block hits needed to reach the full block hit speed multiplier',
-            points: 50,
+            points: 100,
             pointsMax: 100,
             set: function () {
-                var per = this.points / this.pointsMax;
-
-                Features.ballBlockHitOverHits = Math.floor(10 + 990 * per);
+                Features.ballBlockHitOverHits = Math.floor(10 + 990 * this.per);
 
             }
         }
@@ -48,7 +45,11 @@ var Upgrades = {
 
         Upgrades.upgrades.forEach(function (upgrade) {
 
-            upgrade.set();
+            upgrade.set.call({
+
+                per: upgrade.points / upgrade.pointsMax
+
+            });
 
         })
 

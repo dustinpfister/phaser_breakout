@@ -13,7 +13,7 @@ var Features = {
 
     //round
     round: 1,
-    round_start : 1,
+    round_start : 30,
 
     // score
     score: 0,
