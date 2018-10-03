@@ -58,8 +58,6 @@ var Features = {
 
         Features.ballSpeed = Math.floor((125 + Features.ballSpeedBase * (Features.round - 1)) * hitUp);
 
-        console.log('yes : ' + Features.ballSpeedBase);
-
     },
 
     /********** EVENTS **********/

@@ -3,8 +3,8 @@ Upgrades.js
 
 Just a reminder of what this file is for
 
- * EXP SYSTEM
- * STATE OF UPGRADES
+ * STORES STATE OF UPGRADES
+ * Holds methods that set variables in features.js
 
  ***********/
 
@@ -27,11 +27,7 @@ var Upgrades = {
 
                 var per = this.points / this.pointsMax;
 
-                console.log(this);
-
                 Features.ballSpeedBase = (30.2 - 25 * per);
-
-                console.log(Features.ballSpeedBase)
 
             }
 
