@@ -13,6 +13,9 @@ var Features = {
 
     //round
     round: 1,
+    round_start : 1,
+
+    // score
     score: 0,
 
     // score
@@ -36,7 +39,7 @@ var Features = {
     // set the current round
     setRound: function (round) {
 
-        Features.round = round;
+        Features.round = Features.round_start || round || 1;
 
         Features.onRoundStart();
 
@@ -54,8 +57,8 @@ var Features = {
         }
 
         Features.ballSpeed = Math.floor((125 + Features.ballSpeedBase * (Features.round - 1)) * hitUp);
-		
-		console.log('yes : ' + Features.ballSpeedBase);
+
+        console.log('yes : ' + Features.ballSpeedBase);
 
     },
 
