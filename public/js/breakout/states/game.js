@@ -21,7 +21,8 @@ Just a reminder of what this file is for
             // upgrades
 
             // calling first upgrade like this for now until I have a better system
-            Upgrades.upgrades.BallSpeedBaseReduce.set();
+            //Upgrades.upgrades.BallSpeedBaseReduce.set();
+            Upgrades.setAllUpgrades();
 
             // make sure game sprites are visible
             Blocks.blocks.visible = true;

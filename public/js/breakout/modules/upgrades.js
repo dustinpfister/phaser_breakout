@@ -14,12 +14,13 @@ var Upgrades = {
 
     points: 6,
 
-    upgrades: {
+    upgrades: [
 
         // reduce the base speed of the ball, that gets raised with each round
-        BallSpeedBaseReduce: {
+        {
 
-            points: 10,
+            desc: 'Ball Speed Base Reduce',
+            points: 0,
             pointsMax: 10,
 
             // set the values in features.js
@@ -33,8 +34,17 @@ var Upgrades = {
 
         }
 
-    },
+    ],
 
-    setUpgrade: function () {}
+    // set all the upgrades with there current point values
+    setAllUpgrades: function () {
+
+        Upgrades.upgrades.forEach(function (upgrade) {
+
+            upgrade.set();
+
+        })
+
+    }
 
 };
