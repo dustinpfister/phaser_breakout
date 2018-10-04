@@ -18,13 +18,7 @@ var Features = {
 
     // SCORE
     score: 0,
-    perBlockHit: 10,
-    perBlockKill: 25,
-
-    scorePerBlockHP: 10,
-
-    // EXP
-    exp: 0,
+    scorePerBlockHP: 1,
 
     // BALL VALUES
     // ball speed
@@ -94,7 +88,6 @@ var Features = {
 
         }
 
-        //Features.score += Features.perBlockHit;
         Features.onScore(sprite.game);
 
     },
@@ -102,9 +95,9 @@ var Features = {
     // each time a block is killed
     onBlockKill: function (block) {
 
-        console.log(block.data.hpMax)
+        // add to score based on block hp
+        Features.score += Features.scorePerBlockHP * block.data.hpMax;
 
-        //Features.score += Features.perBlockKill;
         Features.onScore(block.game);
 
     },
@@ -182,9 +175,6 @@ var Features = {
     onPaddleBallCollide: function (paddle, ball, per, dir, fromCenter) {
 
         var a = -Math.PI / 2 - Math.PI / 180 * Features.paddleAngle * per * dir;
-
-        //x = Math.floor(Math.cos(a) * game.data.ballSpeed);
-        //y = Math.floor(Math.sin(a) * game.data.ballSpeed);
 
         x = Math.floor(Math.cos(a) * Features.ballSpeed);
         y = Math.floor(Math.sin(a) * Features.ballSpeed);
