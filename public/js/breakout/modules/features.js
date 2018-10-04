@@ -11,28 +11,28 @@ Just a reminder of what this file is for
 
 var Features = {
 
-    //round
+    // ROUND
     round: 1,
     round_start: 1,
     round_won: 0,
 
-    // score
+    // SCORE
     score: 0,
-
-    // score
     perBlockHit: 10,
     perBlockKill: 25,
 
-    // ball values
+    // BALL VALUES
+    // ball speed
     ballSpeed: 10,
     ballSpeedBase: 50,
     ballBlockHits: 0, // used with speed formula
     ballBlockHitMulti: 0.80,
     ballBlockHitOverHits: 100,
 
-    ballDamage: 3,
+    // ball damage
+    ballDamage: 1,
 
-    // paddle
+    // PADDLE
     paddleAngle: 75, // max angle range from center to left or right in degrees
 
     /********** SETUP **********/

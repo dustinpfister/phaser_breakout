@@ -31,7 +31,7 @@ var Upgrades = {
             points: 0,
             pointsMax: 100,
             set: function () {
-                Features.ballBlockHitOverHits = Math.floor(10 + 990 * this.per);
+                Features.ballBlockHitOverHits = Math.floor(10 + 490 * this.per);
             }
         }, {
             name: 'Reduce ball speed block hit multiplier',
