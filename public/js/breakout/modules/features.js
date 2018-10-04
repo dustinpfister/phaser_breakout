@@ -20,6 +20,10 @@ var Features = {
     score: 0,
     scorePerBlockHP: 1,
 
+    // EXP
+    exp: 0,
+    points: 0,
+
     // BALL VALUES
     // ball speed
     ballSpeed: 10,
@@ -126,6 +130,13 @@ var Features = {
         Features.round_won = 0;
 
         data.lives = data.lives_start + data.lives_won - data.lives_lost;
+
+    },
+
+    // called once on each game over
+    onGameEnd: function () {
+
+        Features.exp += Features.score;
 
     },
 

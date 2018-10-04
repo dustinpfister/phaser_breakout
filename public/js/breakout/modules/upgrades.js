@@ -10,10 +10,6 @@ Just a reminder of what this file is for
 
 var Upgrades = {
 
-    exp: 0,
-
-    points: 6,
-
     upgrades: [
 
         // BALL SPEED

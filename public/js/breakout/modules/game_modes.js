@@ -20,6 +20,7 @@ var GameModes = (function () {
 
         group[0].text = 'round: ' + Features.round + ', score: ' + Features.score + ', lives: ' + game.data.lives;
         group[1].text = 'ball speed: ' + Features.ballSpeed;
+        group[2].text = 'exp: ' + Features.exp;
 
     };
 
@@ -233,6 +234,8 @@ var GameModes = (function () {
 
                 // default paddle velocity to zero
                 paddle.body.velocity.set(0, 0);
+
+                Features.onGameEnd(game);
 
                 debug();
 
