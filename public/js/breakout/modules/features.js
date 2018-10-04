@@ -21,6 +21,11 @@ var Features = {
     perBlockHit: 10,
     perBlockKill: 25,
 
+    scorePerBlockHP: 10,
+
+    // EXP
+    exp: 0,
+
     // BALL VALUES
     // ball speed
     ballSpeed: 10,
@@ -89,16 +94,18 @@ var Features = {
 
         }
 
-        Features.score += Features.perBlockHit;
+        //Features.score += Features.perBlockHit;
         Features.onScore(sprite.game);
 
     },
 
     // each time a block is killed
-    onBlockKill: function (sprite) {
+    onBlockKill: function (block) {
 
-        Features.score += Features.perBlockKill;
-        Features.onScore(sprite.game);
+        console.log(block.data.hpMax)
+
+        //Features.score += Features.perBlockKill;
+        Features.onScore(block.game);
 
     },
 

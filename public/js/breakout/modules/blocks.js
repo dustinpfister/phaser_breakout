@@ -101,15 +101,16 @@ var Blocks = {
 
             sprite.x = this.sx + x;
             sprite.y = this.sy + y;
-            sprite.data.hp = 1 + Math.floor((1 - yPer) * 2);
+
+            sprite.data.hpMax = 1 + Math.floor((1 - yPer) * 2);
+            sprite.data.hp = sprite.data.hpMax;
+
             sprite.frame = sprite.data.hp - 1;
             sprite.alpha = 1;
 
             i += 1;
 
         }
-
-        console.log('block length: ' + this.blocks.length);
 
     },
 

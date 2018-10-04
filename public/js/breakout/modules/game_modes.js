@@ -207,8 +207,6 @@ var GameModes = (function () {
                     // if up on keyboard
                     if (keyboard.isDown(38)) {
 
-                        console.log(paddle.x);
-
                         serveBall.call(this, paddle, ball);
 
                     }
