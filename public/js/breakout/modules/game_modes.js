@@ -3,11 +3,11 @@ game_modes.js
 
 Just a reminder of what this file is for
 
-    * INTERNAL HELPERS - any helper method for the game modes
-    * API - a public api that can be used to set the current game mode, setup the module and so forth
-    * GAME MODES - different update methods to be called in the main update method of the game state
+ * INTERNAL HELPERS - any helper method for the game modes
+ * API - a public api that can be used to set the current game mode, setup the module and so forth
+ * GAME MODES - different update methods to be called in the main update method of the game state
 
-***********/
+ ***********/
 
 var GameModes = (function () {
 
@@ -246,7 +246,8 @@ var GameModes = (function () {
                 // if up on keyboard
                 if (keyboard.isDown(38)) {
 
-                    Features.setRound(1);
+                    Features.onGameStart.call(this);
+                    Features.setRound();
 
                     // reset score
                     Features.score = 0;

@@ -13,7 +13,8 @@ var Features = {
 
     //round
     round: 1,
-    round_start : 1,
+    round_start: 1,
+    round_won: 0,
 
     // score
     score: 0,
@@ -29,7 +30,7 @@ var Features = {
     ballBlockHitMulti: 0.80,
     ballBlockHitOverHits: 100,
 
-    ballDamage: 1,
+    ballDamage: 3,
 
     // paddle
     paddleAngle: 75, // max angle range from center to left or right in degrees
@@ -37,9 +38,9 @@ var Features = {
     /********** SETUP **********/
 
     // set the current round
-    setRound: function (round) {
+    setRound: function () {
 
-        Features.round = Features.round_start || round || 1;
+        Features.round = Features.round_start + Features.round_won;
 
         Features.onRoundStart();
 
@@ -122,6 +123,8 @@ var Features = {
 
         var data = this.game.data;
 
+        Features.round_won = 0;
+
         data.lives = data.lives_start + data.lives_won - data.lives_lost;
 
     },
@@ -137,7 +140,8 @@ var Features = {
     // called once each time a round ends
     onRoundEnd: function () {
 
-        Features.setRound(Features.round += 1);
+        Features.round_won += 1;
+        Features.setRound();
 
         // just set up another set for now
         Blocks.setupDataObjects();

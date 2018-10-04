@@ -20,8 +20,8 @@ var Blocks = {
 
         this.game = opt.game || game;
         this.sheetKey = 'blocks';
-        this.gridWidth = 10; //10;
-        this.gridHeight = 9; //8;
+        this.gridWidth = 10;
+        this.gridHeight = 8;
 
         // number of block lengths on the sides
         this.blockWidthAjust = 1.25;
