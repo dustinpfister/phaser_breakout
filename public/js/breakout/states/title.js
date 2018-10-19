@@ -15,9 +15,10 @@ game.state.add('title', {
 
         // make game sprites not visible
         Blocks.blocks.visible = false;
+        Paddle.paddle.visible = false;
         Ball.ball.visible = false;
 
-        game.state.start('game', false, false);
+        //game.state.start('game', false, false);
 
     }
 

@@ -106,7 +106,7 @@ game.state.add('mksheets', {
         ball.animations.add('roll', fd, 60, true);
 
         // paddle
-        var paddle = game.add.sprite(0, 0, 'paddle', 0);
+        var paddle = Paddle.paddle = game.add.sprite(0, 0, 'paddle', 0);
         paddle.name = 'paddle';
 
         //game.state.start('game', false, false);

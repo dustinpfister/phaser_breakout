@@ -26,6 +26,7 @@ Just a reminder of what this file is for
 
             // make sure game sprites are visible
             Blocks.blocks.visible = true;
+            Paddle.paddle.visible = true;
             Ball.ball.visible = true;
 
             // start with three lives
