@@ -18,6 +18,21 @@ game.state.add('title', {
         Paddle.paddle.visible = false;
         Ball.ball.visible = false;
 
+        // crude title for now at least
+        var font = {
+            fill: 'white',
+            font: '20px courier'
+        };
+        var text = game.add.text(game.world.centerX, 32, 'Phaser Breakout', font);
+        text.anchor.set(0.5, 0.5);
+
+        game.input.onDown.add(function () {
+
+            text.destroy();
+            game.state.start('game', false, false);
+
+        });
+
         //game.state.start('game', false, false);
 
     }
