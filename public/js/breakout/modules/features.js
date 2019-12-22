@@ -62,6 +62,18 @@ var Features = {
 
         Features.ballSpeed = Math.floor((125 + Features.ballSpeedBase * (Features.round - 1)) * hitUp);
 
+        //Features.ballSpeed = 160;
+
+    },
+
+    updateLives: function () {
+
+        var data = game.data;
+
+        //data.lives = data.lives_start + data.lives_won - data.lives_lost;
+
+        data.lives = 3;
+
     },
 
     /********** EVENTS **********/
@@ -116,7 +128,9 @@ var Features = {
 
         data.lives_won = Math.floor(Features.score / 1000);
 
-        data.lives = data.lives_start + data.lives_won - data.lives_lost;
+        //data.lives = data.lives_start + data.lives_won - data.lives_lost;
+
+        Features.updateLives()
 
     },
 
@@ -129,7 +143,9 @@ var Features = {
 
         Features.round_won = 0;
 
-        data.lives = data.lives_start + data.lives_won - data.lives_lost;
+        //data.lives = data.lives_start + data.lives_won - data.lives_lost;
+
+        Features.updateLives()
 
     },
 
@@ -176,7 +192,11 @@ var Features = {
 
         data.lives_lost += 1;
 
-        data.lives = data.lives_start + data.lives_won - data.lives_lost;
+        //data.lives = data.lives_start + data.lives_won - data.lives_lost;
+
+        //data.lives = 3;
+
+        Features.updateLives()
 
     },
 
